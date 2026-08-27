@@ -11,7 +11,11 @@ const manifestoNav = [
   { id: '#genese', label: 'Genèse' },
   { id: '#vision', label: 'Vision' },
   { id: '#mission', label: 'Mission' },
-  { id: '#positionnement', label: 'Positionnement' },
+  { id: '#gouvernance', label: 'Gouvernance' },
+  { id: '#valeurs', label: 'Principes' },
+  { id: '#adn', label: 'Piliers' },
+  { id: '#equipe', label: 'Fondateurs' },
+  { id: '#engagement', label: 'Adhésion' },
 ]
 
 const blocks = [
@@ -19,83 +23,84 @@ const blocks = [
     id: 'genese',
     num: '01',
     tag: 'Genèse',
-    title: "Une réponse à l'urgence de <em>penser</em> le Cameroun depuis l'intérieur.",
+    title: "Une réponse à l'urgence de <em>mobiliser</em> la jeunesse depuis le terrain.",
     paragraphs: [
-      "Vu du Cameroun est née d'un constat: le pays dispose d'un potentiel stratégique considérable, mais ce potentiel reste insuffisamment articulé, visible et défendu.",
-      "Face à un monde en mutation rapide, il devenait impératif de créer un espace de réflexion autonome, endogène, tourné vers l'excellence et l'action.",
+      "Vu du Cameroun est une association à portée nationale et internationale, active depuis 2023. Elle naît d'un constat simple: l'émergence du Cameroun et la préservation de son unité nationale reposent sur une jeunesse éduquée, intègre, patriote et économiquement intégrée.",
+      "Face à la subversion numérique, à l'apathie civique et aux vulnérabilités sociales, le mouvement organise une action méthodique, pacifique et complémentaire aux efforts de l'État et des collectivités territoriales décentralisées.",
     ],
-    quote: { text: "Il ne suffit pas d'être. Il faut se donner les moyens d'être perçu, écouté, choisi.", cite: 'Fondateurs de Vu du Cameroun' },
+    quote: { text: "Éclairer l'invisible, écouter les silences, vitaliser l'inertie, ériger l'avenir et construire le réel.", cite: 'Doctrine fondatrice' },
   },
   {
     id: 'vision',
     num: '02',
     tag: 'Vision',
-    title: 'Un Cameroun <em>souverain</em>, influent et maître de son récit.',
+    title: 'Un Cameroun <em>cohésif</em>, jeune, responsable et productif.',
     paragraphs: [
-      "Nous voyons un Cameroun qui ne subit plus l'agenda des autres, mais qui contribue à le définir.",
-      "Notre vision est celle d'une nation qui apprend à se penser elle-même avec rigueur, à se positionner avec audace et à s'engager depuis une posture de force.",
+      "La Dynamique vise à constituer une force de proposition et d'action citoyenne capable de dynamiser les transformations sociales positives de la jeunesse en faveur de l'émergence du Cameroun.",
+      "Elle défend une citoyenneté active: paix, unité nationale, mérite, bénévolat, vigilance civique, respect des institutions et création de valeur locale.",
     ],
   },
   {
     id: 'mission',
     num: '03',
     tag: 'Mission',
-    title: 'Produire, connecter et <em>catalyser</em>.',
+    title: 'Éduquer, insérer et <em>protéger</em> le lien national.',
     paragraphs: [
-      "<strong>Produire:</strong> des analyses stratégiques et des recommandations politiques fondées sur des données rigoureuses.",
-      "<strong>Connecter:</strong> les décideurs aux idées, les institutions aux expertises, le Cameroun à ses partenaires stratégiques mondiaux.",
-      "<strong>Catalyser:</strong> des initiatives concrètes, des réformes et des partenariats durables qui transforment l'analyse en action.",
+      "<strong>Former:</strong> encourager l'engagement civique, le bénévolat et l'esprit citoyen des jeunes.",
+      "<strong>Insérer:</strong> promouvoir l'entrepreneuriat, le Made in Cameroon et les opportunités d'affaires utiles à l'autonomie des jeunes.",
+      "<strong>Stabiliser:</strong> contribuer à la cohésion sociale, à la lutte contre la désinformation numérique, à la paix et au développement durable.",
     ],
   },
   {
-    id: 'positionnement',
+    id: 'gouvernance',
     num: '04',
-    tag: 'Positionnement',
-    title: "À l'intersection du think tank et du réseau d'<em>influence</em>.",
+    tag: 'Gouvernance',
+    title: "Une architecture claire pour passer de l'<em>idée</em> au terrain.",
     paragraphs: [
-      "Vu du Cameroun occupe un espace stratégique singulier: une entité hybride qui conjugue la rigueur analytique et la puissance opérationnelle.",
-      "Nous sommes également une passerelle entre le Cameroun et le monde francophone, entre l'Afrique centrale et les institutions financières internationales.",
+      "La gouvernance articule un Conseil d'Administration Stratégique, un Bureau National Exécutif et un Collège des Sages, afin de séparer l'orientation, l'exécution et la veille éthique.",
+      "Cette architecture donne au mouvement un visage moderne: doctrine, discipline, redevabilité, action de proximité et partenariats structurés.",
     ],
   },
 ]
 
 const values = [
-  { title: 'Intégrité analytique', text: "Nos analyses sont rigoureuses, indépendantes et fondées sur des données vérifiables.", icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>' },
-  { title: 'Souveraineté de pensée', text: "Nous pensons le Cameroun depuis le Cameroun avec des cadres d'analyse endogènes.", icon: '<circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path>' },
-  { title: 'Excellence sans compromis', text: "L'excellence est une exigence intérieure que nous nous imposons dans tout ce que nous produisons.", icon: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>' },
-  { title: 'Action stratégique', text: "Chaque initiative est conçue pour produire des effets mesurables.", icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>' },
-  { title: 'Intelligence collective', text: "Nous cultivons le dialogue et la confrontation d'expertises plurielles.", icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>' },
-  { title: 'Ancrage et ouverture', text: "Enracinés dans la réalité camerounaise, ouverts sur le monde.", icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>' },
+  { title: 'Patriotisme républicain', text: "Servir le Cameroun dans le respect des lois, des institutions, de la paix et de l'unité nationale.", icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>' },
+  { title: 'Cohésion sociale', text: "Préserver la communion des peuples et combattre les fractures alimentées par la haine, la peur ou la désinformation.", icon: '<circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path>' },
+  { title: 'Mérite et intégrité', text: "Former une génération de service dont l'autorité vient de la compétence, de la responsabilité et de l'exemplarité.", icon: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>' },
+  { title: 'Action concrète', text: "Déployer des projets communautaires, humanitaires, techniques et économiques au bénéfice des populations locales.", icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>' },
+  { title: 'Intelligence collective', text: "Croiser les expertises des jeunes, des aînés, des entrepreneurs, des institutions et des communautés.", icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>' },
+  { title: 'Ancrage et ouverture', text: "Agir depuis les réalités camerounaises tout en coopérant avec les espaces africains, internationaux et diasporiques.", icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>' },
 ]
 
 const pillars = [
-  { num: '01', title: 'Indépendance institutionnelle', text: "Nous n'appartenons à aucun parti, à aucun gouvernement, à aucun groupe financier." },
-  { num: '02', title: 'Expertise pluridisciplinaire', text: "Économistes, juristes, géopolitologues et diplomates composent notre réseau." },
-  { num: '03', title: 'Présence internationale', text: 'Des correspondants et partenaires dans 27 pays sur cinq continents.' },
-  { num: '04', title: 'Impact mesurable', text: "Chaque programme est évalué à l'aune de son impact réel." },
+  { num: '01', title: 'Collège des Sages', text: "Garantit la continuité morale, la paix, le civisme, l'éthique républicaine et le respect de la doctrine." },
+  { num: '02', title: 'Cercle des Analystes Stratégiques', text: "Assure la veille sociale, humanitaire, géopolitique, économique et technologique au service des décisions jeunesse." },
+  { num: '03', title: 'Pôle des Bâtisseurs du Réel', text: "Pilote les projets de terrain, l'ingénierie du développement, la création d'entreprises et les partenariats productifs." },
+  { num: '04', title: 'Bureau National Exécutif', text: "Coordonne l'action opérationnelle, l'administration interne, les finances, la communication citoyenne et le suivi des projets." },
 ]
 
-const tags = ['Think Tank', "Réseau d'influence", 'Diplomatie parallèle', 'Policy Research', 'Leadership Formation', 'Partenariats stratégiques']
+const tags = ['Apolitique', 'Jeunesse', 'Paix', 'Made in Cameroon', 'Vigilance numérique', 'Bénévolat', 'CTD', 'Diaspora']
 
 const figures = [
-  { num: '27+', strong: 'Pays partenaires', span: '5 continents' },
-  { num: '150+', strong: 'Experts mobilisés', span: 'Réseau actif' },
-  { num: '48', strong: 'Publications', span: 'Analyses & rapports' },
-  { num: '12', strong: 'Initiatives lancées', span: 'Depuis 2020' },
+  { num: '2023', strong: 'Depuis', span: 'Association active' },
+  { num: '03', strong: 'Instances', span: 'Conseil, exécutif, sages' },
+  { num: '03', strong: 'Piliers', span: 'Morale, analyse, terrain' },
+  { num: 'National', strong: 'Portée', span: 'Ouverture internationale' },
 ]
 
 const team = [
-  { initials: 'JB', name: 'Jean-Baptiste Mbarga', role: 'Président fondateur', text: "Économiste et stratège, ancien conseiller auprès d'institutions multilatérales." },
-  { initials: 'AM', name: 'Amina Moussa-Ngo', role: 'Directrice générale', text: 'Spécialiste des relations internationales et de la diplomatie économique.' },
-  { initials: 'PK', name: 'Paul Kamdem', role: 'Dir. Recherche & Analyses', text: 'Docteur en sciences politiques, spécialiste de la gouvernance en Afrique centrale.' },
-  { initials: 'SE', name: 'Sophie Engamba', role: 'Dir. Partenariats internationaux', text: 'Experte en investissements stratégiques et en partenariats public-privé.' },
+  { initials: 'BL', name: 'Éric Léonel Loumou', role: 'Membre fondateur', text: "Garant de l'esprit fondateur, de la vision et des principes essentiels de la Dynamique." },
+  { initials: 'MG', name: 'Genéviève Mangondo', role: 'Membre fondatrice', text: "Contribue à la transmission des valeurs, de l'éthique et de l'exigence de service." },
+  { initials: 'MD', name: 'Dalami Mahaman', role: 'Membre fondateur', text: "Participe à l'ancrage républicain et à la continuité morale du mouvement." },
+  { initials: 'ON', name: 'Ongmetana Nadège Vanessa', role: 'Membre fondatrice', text: "Porte l'engagement pour une jeunesse responsable, formée et socialement utile." },
+  { initials: 'TB', name: 'Tezore .Bak', role: 'Membre fondateur', text: "Soutient l'organisation des énergies citoyennes autour de l'intérêt général." },
 ]
 
 const engagements = [
-  { title: 'Membres du réseau', text: "Intégrez un cercle d'excellence et accédez à nos analyses et espaces de dialogue.", icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>' },
-  { title: 'Partenaires institutionnels', text: "Co-construisez des initiatives stratégiques et un accès privilégié à notre réseau.", icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>' },
-  { title: 'Investisseurs stratégiques', text: "Orientez vos investissements avec la profondeur d'analyse d'experts.", icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>' },
-  { title: 'Talents & jeunes leaders', text: 'Nous structurons une nouvelle génération de décideurs.', icon: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>' },
+  { title: 'Membres adhérents', text: "Soutenez les actions de la Dynamique et participez aux espaces de mobilisation citoyenne.", icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>' },
+  { title: 'Membres actifs', text: "Engagez-vous au quotidien dans les structures de terrain, les formations et les projets communautaires.", icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>' },
+  { title: 'Partenaires', text: "Co-construisez des programmes de formation, d'insertion, de paix sociale et de développement local.", icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>' },
+  { title: 'Membres d’honneur', text: 'Apportez expérience, crédibilité et soutien aux chantiers d’intérêt général portés par la jeunesse.', icon: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>' },
 ]
 </script>
 
@@ -107,26 +112,26 @@ const engagements = [
         <div class="about-hero-breadcrumb reveal">
           <RouterLink to="/">Accueil</RouterLink>
           <span>›</span>
-          <span class="current">À propos</span>
+          <span class="current">Instance</span>
         </div>
         <div class="about-hero-layout">
           <div>
-            <div class="label reveal">À propos</div>
+            <div class="label reveal">D-GENECI</div>
             <h1 class="about-hero-title reveal reveal-delay-1">
-              Une institution stratégique<br />
-              <em>pour penser</em> le Cameroun.
+              Une dynamique citoyenne<br />
+              <em>pour agir</em> avec la jeunesse.
             </h1>
           </div>
           <div>
             <p class="about-hero-desc reveal reveal-delay-2">
-              Vu du Cameroun réunit la rigueur d'un think tank africain, la puissance d'un
-              réseau d'influence et la capacité d'action d'une passerelle vers les partenaires
-              internationaux.
+              Dynamique Génération Citoyenne est une organisation citoyenne, apolitique,
+              éducative, formatrice et d'intérêt général, pensée pour transformer l'énergie de
+              la jeunesse en moteur de développement durable.
             </p>
             <div class="about-hero-stats reveal reveal-delay-3">
-              <div><span>Think tank</span><strong>Africain</strong></div>
-              <div><span>Réseau</span><strong>Stratégique</strong></div>
-              <div><span>Passerelle</span><strong>Internationale</strong></div>
+              <div><span>Nature</span><strong>Apolitique</strong></div>
+              <div><span>Mission</span><strong>Former</strong></div>
+              <div><span>Terrain</span><strong>Agir</strong></div>
               <div><span>Ancrage</span><strong>Cameroun</strong></div>
             </div>
           </div>
@@ -171,8 +176,8 @@ const engagements = [
       <div class="container">
         <div class="about-heading reveal">
           <div class="gold-rule"></div>
-          <span class="label">Nos valeurs fondatrices</span>
-          <h2>Ce qui nous <em>définit</em> et nous distingue.</h2>
+          <span class="label">Principes d'action</span>
+          <h2>Ce qui nous <em>oblige</em> et nous structure.</h2>
         </div>
         <div class="about-values-grid reveal reveal-delay-1">
           <article v-for="(v, i) in values" :key="i" class="about-value-card">
@@ -189,15 +194,16 @@ const engagements = [
         <div class="about-adn-grid reveal">
           <div class="about-adn-left">
             <div class="about-adn-glow" aria-hidden="true"></div>
-            <span class="label">Notre ADN stratégique</span>
-            <h2>Ce qui rend notre <em>approche</em> unique.</h2>
+            <span class="label">Architecture opérationnelle</span>
+            <h2>Trois piliers pour <em>construire</em> le réel.</h2>
             <p>
-              Notre architecture opérationnelle combine la rigueur académique, l'intelligence
-              du terrain, la puissance du réseau et la capacité d'action directe.
+              La Dynamique combine une veille morale, une capacité d'analyse et une ingénierie
+              de terrain pour répondre aux besoins de la jeunesse et des communautés locales.
             </p>
             <p>
-              Cette combinaison fait de nous un partenaire stratégique de premier ordre pour
-              les institutions, les gouvernements et les investisseurs.
+              Elle assume un style de mouvement citoyen moderne: structuré, discipliné,
+              transparent dans son action et capable de coopérer avec les institutions sans
+              perdre son ancrage populaire.
             </p>
             <div class="about-tags">
               <span v-for="(tag, i) in tags" :key="i">{{ tag }}</span>
@@ -220,8 +226,8 @@ const engagements = [
       <div class="container">
         <div class="about-heading reveal">
           <div class="gold-rule"></div>
-          <span class="label">Chiffres clés</span>
-          <h2>Nos repères d'<em>impact</em>.</h2>
+          <span class="label">Repères statutaires</span>
+          <h2>Une organisation faite pour la <em>continuité</em>.</h2>
         </div>
         <div class="about-figures-grid reveal reveal-delay-1">
           <article v-for="(f, i) in figures" :key="i" class="about-figure">
@@ -237,11 +243,12 @@ const engagements = [
       <div class="container">
         <div class="about-heading reveal">
           <div class="gold-rule"></div>
-          <span class="label">Notre équipe dirigeante</span>
-          <h2>Les architectes d'une <em>vision</em>.</h2>
+          <span class="label">Collège fondateur</span>
+          <h2>Les garants d'un <em>esprit</em>.</h2>
           <p>
-            Un collectif d'élites engagées, unies par la conviction que le Cameroun mérite une
-            institution à la hauteur de son potentiel.
+            Les fondateurs garantissent la vision, les valeurs et les principes fondamentaux de
+            la Dynamique. Les responsabilités opérationnelles sont ensuite structurées par les
+            organes prévus dans les statuts.
           </p>
         </div>
         <div class="about-team-grid reveal reveal-delay-1">
@@ -262,15 +269,15 @@ const engagements = [
       <div class="container">
         <div class="about-engagement-grid reveal">
           <div class="about-engagement-left">
-            <span class="label">Rejoindre le cercle</span>
-            <h2>Construisons <em>ensemble</em>.</h2>
+            <span class="label">Rejoindre la dynamique</span>
+            <h2>Servir, former, <em>agir</em>.</h2>
             <p>
-              Vous êtes décideur, intellectuel, entrepreneur, diplomate ou investisseur. Votre
-              place est ici.
+              L'adhésion repose sur la moralité, le patriotisme, l'esprit de service, les
+              compétences et l'alignement éthique.
             </p>
             <div class="about-engagement-actions">
               <a href="mailto:contact@vuducameroun.org" class="btn-primary">Nous rejoindre</a>
-              <a href="mailto:partenariat@vuducameroun.org" class="btn-ghost">Proposer un partenariat</a>
+              <a href="mailto:partenariat@vuducameroun.org" class="btn-ghost">Proposer un projet</a>
             </div>
           </div>
           <div class="about-engagement-right">
@@ -302,8 +309,10 @@ const engagements = [
 }
 
 .about-hero-bg {
-  background: radial-gradient(circle at 72% 40%, rgba(201, 168, 76, 0.08), transparent 45%),
-    radial-gradient(circle at 18% 18%, rgba(201, 168, 76, 0.05), transparent 36%);
+  background:
+    linear-gradient(120deg, rgba(31, 182, 109, 0.1), transparent 34%),
+    linear-gradient(245deg, rgba(217, 58, 53, 0.075), transparent 36%),
+    repeating-linear-gradient(90deg, rgba(245, 242, 236, 0.035) 0 1px, transparent 1px 92px);
   inset: 0;
   position: absolute;
 }
@@ -366,7 +375,10 @@ const engagements = [
 }
 
 .about-hero-stats {
-  border: 1px solid var(--grey-dark);
+  background:
+    linear-gradient(135deg, rgba(31, 182, 109, 0.055), rgba(201, 168, 76, 0.035), rgba(217, 58, 53, 0.045)),
+    rgba(20, 20, 20, 0.72);
+  border: 1px solid var(--gold-line);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -414,8 +426,10 @@ const engagements = [
 
 .about-manifesto-sidebar {
   align-self: start;
-  background: linear-gradient(180deg, #c9a84c08, #141414a6);
-  border: 1px solid var(--grey-dark);
+  background:
+    linear-gradient(180deg, rgba(31, 182, 109, 0.06), rgba(201, 168, 76, 0.045), rgba(217, 58, 53, 0.045)),
+    #141414a6;
+  border: 1px solid var(--gold-line);
   box-shadow: 0 24px 60px #0000003d;
   padding: 2rem 1.75rem;
   position: sticky;
@@ -474,7 +488,7 @@ const engagements = [
 }
 
 .about-block-header div {
-  background: var(--grey-dark);
+  background: linear-gradient(90deg, var(--gold-line), transparent);
   flex: 1;
   height: 1px;
 }
@@ -507,6 +521,7 @@ const engagements = [
 }
 
 .about-block blockquote {
+  background: linear-gradient(90deg, rgba(31, 182, 109, 0.055), rgba(201, 168, 76, 0.035), transparent);
   border-left: 2px solid var(--gold);
   margin: 2rem 0;
   padding: 1.3rem 0 1.3rem 1.8rem;
@@ -545,12 +560,15 @@ const engagements = [
 }
 
 .about-values-grid {
-  border: 1px solid var(--grey-dark);
+  border: 1px solid var(--gold-line);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
 .about-value-card {
+  background:
+    linear-gradient(180deg, rgba(245, 242, 236, 0.018), transparent 45%),
+    var(--black-3);
   border-bottom: 1px solid var(--grey-dark);
   border-right: 1px solid var(--grey-dark);
   padding: 2.75rem 2.25rem;
@@ -567,6 +585,7 @@ const engagements = [
 
 .about-value-icon {
   align-items: center;
+  background: linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.06), rgba(217, 58, 53, 0.065));
   border: 1px solid var(--gold-line);
   display: flex;
   height: 44px;
@@ -605,7 +624,10 @@ const engagements = [
 }
 
 .about-adn-left {
-  background: linear-gradient(180deg, rgba(201, 168, 76, 0.03), transparent 40%);
+  background:
+    linear-gradient(125deg, rgba(31, 182, 109, 0.07), transparent 38%),
+    linear-gradient(245deg, rgba(217, 58, 53, 0.05), transparent 34%),
+    linear-gradient(180deg, rgba(201, 168, 76, 0.04), transparent 42%);
   border: 1px solid var(--grey-dark);
   border-right: none;
   overflow: hidden;
@@ -630,6 +652,7 @@ const engagements = [
 }
 
 .about-tags span {
+  background: rgba(201, 168, 76, 0.035);
   border: 1px solid var(--gold-line);
   color: var(--gold);
   font-family: 'Syne', sans-serif;
@@ -647,24 +670,25 @@ const engagements = [
 
 .about-adn-grid {
   background: var(--black-2);
-  border: 1px solid var(--grey-dark);
+  border: 1px solid var(--gold-line);
   gap: 0;
   grid-template-columns: 1fr 1fr;
 }
 
 .about-adn-glow {
-  background: radial-gradient(circle, rgba(201, 168, 76, 0.08), transparent 70%);
-  border-radius: 50%;
-  bottom: -100px;
-  height: 420px;
-  left: -80px;
+  background:
+    repeating-linear-gradient(90deg, rgba(201, 168, 76, 0.08) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(0deg, rgba(245, 242, 236, 0.035) 0 1px, transparent 1px 28px);
+  bottom: -40px;
+  height: 260px;
+  left: -20px;
   pointer-events: none;
   position: absolute;
-  width: 420px;
+  width: 360px;
 }
 
 .about-pillar {
-  border-bottom: 1px solid var(--grey-dark);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.16);
   display: flex;
   gap: 1.75rem;
   padding: 2.3rem 3rem;
@@ -692,12 +716,15 @@ const engagements = [
 }
 
 .about-figures-grid {
-  border: 1px solid var(--grey-dark);
+  border: 1px solid var(--gold-line);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
 
 .about-figure {
+  background:
+    linear-gradient(180deg, rgba(31, 182, 109, 0.035), transparent 50%, rgba(217, 58, 53, 0.028)),
+    var(--black-3);
   border-right: 1px solid var(--grey-dark);
   padding: 3rem 2rem;
   text-align: center;
@@ -737,12 +764,15 @@ const engagements = [
 }
 
 .about-team-grid {
-  border: 1px solid var(--grey-dark);
+  border: 1px solid var(--gold-line);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
 }
 
 .about-team-card {
+  background:
+    linear-gradient(180deg, rgba(245, 242, 236, 0.018), transparent 48%),
+    var(--black-3);
   border-right: 1px solid var(--grey-dark);
   padding: 2.5rem;
 }
@@ -753,7 +783,8 @@ const engagements = [
 
 .about-avatar {
   align-items: center;
-  border: 1px solid var(--grey-dark);
+  background: linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.08), rgba(217, 58, 53, 0.07));
+  border: 1px solid var(--gold-line);
   border-radius: 50%;
   display: flex;
   height: 70px;
@@ -788,7 +819,9 @@ const engagements = [
 
 .about-engagement-left {
   align-items: center;
-  background: radial-gradient(circle at 20% 20%, rgba(201, 168, 76, 0.12), transparent 40%),
+  background:
+    linear-gradient(125deg, rgba(31, 182, 109, 0.11), transparent 38%),
+    linear-gradient(245deg, rgba(217, 58, 53, 0.08), transparent 36%),
     linear-gradient(180deg, #c9a84c14, #141414c7);
   border: 1px solid var(--grey-dark);
   border-right: none;
@@ -853,7 +886,7 @@ const engagements = [
 
 .about-engagement-grid {
   background: var(--black-2);
-  border: 1px solid var(--grey-dark);
+  border: 1px solid var(--gold-line);
   gap: 0;
   grid-template-columns: minmax(360px, 0.42fr) minmax(0, 0.58fr);
 }
@@ -864,6 +897,7 @@ const engagements = [
 
 .about-engagement-icon {
   align-items: center;
+  background: linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.06), rgba(217, 58, 53, 0.06));
   border: 1px solid var(--gold-line);
   display: flex;
   flex: 0 0 auto;
@@ -987,5 +1021,6 @@ const engagements = [
   .about-engagement-left p {
     max-width: 100%;
   }
+
 }
 </style>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch, nextTick } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import { useReveal } from './composables/useReveal'
 
 const route = useRoute()
 const scrolled = ref(false)
+const navOpen = ref(false)
+const theme = ref<'dark' | 'light'>('dark')
 const cursorX = ref(0)
 const cursorY = ref(0)
 const ringX = ref(0)
@@ -25,6 +27,24 @@ const onMouseMove = (e: MouseEvent) => {
   cursorY.value = e.clientY
 }
 
+const closeNav = () => {
+  navOpen.value = false
+}
+
+const applyTheme = (value: 'dark' | 'light') => {
+  document.documentElement.dataset.theme = value
+  document.documentElement.style.colorScheme = value
+}
+
+const toggleTheme = () => {
+  theme.value = theme.value === 'dark' ? 'light' : 'dark'
+  window.localStorage.setItem('vdc-theme', theme.value)
+  applyTheme(theme.value)
+}
+
+const themeLabel = computed(() => theme.value === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre')
+const logoSrc = computed(() => theme.value === 'light' ? '/logo/logo-black.png' : '/logo/logo.png')
+
 const animateRing = () => {
   ringX.value += (targetX - ringX.value) * 0.18
   ringY.value += (targetY - ringY.value) * 0.18
@@ -40,6 +60,10 @@ const refreshReveals = () => {
 }
 
 onMounted(() => {
+  const storedTheme = window.localStorage.getItem('vdc-theme')
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches
+  theme.value = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : prefersLight ? 'light' : 'dark'
+  applyTheme(theme.value)
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('mousemove', onMouseMove)
   onScroll()
@@ -54,6 +78,7 @@ onUnmounted(() => {
 })
 
 watch(() => route.path, () => {
+  closeNav()
   refreshReveals()
 })
 </script>
@@ -74,20 +99,20 @@ watch(() => route.path, () => {
     <header class="site-nav" :class="{ scrolled }">
       <RouterLink to="/" class="nav-logo" aria-label="Vu du Cameroun">
         <div class="logo-icon">
-          <img src="/logo/logo.png" alt="Vu du Cameroun" class="logo-image" />
+          <img :src="logoSrc" alt="Vu du Cameroun" class="logo-image" />
         </div>
         <div class="logo-text">
           <span class="logo-name">Vu du Cameroun</span>
-          <span class="logo-sub">Eclairer l'invisible. Maitriser le réel.</span>
+          <span class="logo-sub">Éclairer. Former. Agir.</span>
         </div>
       </RouterLink>
 
       <nav class="nav-links" aria-label="Navigation principale">
-        <RouterLink to="/instance">Instance</RouterLink>
-        <a href="/#domains">Théâtres</a>
-        <a href="/#approach">Doctrine</a>
-        <a href="/#publications">Notes</a>
-        <a href="/#partners">Réseaux</a>
+        <RouterLink to="/instance" @click="closeNav">Instance</RouterLink>
+        <RouterLink to="/theatres" @click="closeNav">Théâtres</RouterLink>
+        <RouterLink to="/methode" @click="closeNav">Méthode</RouterLink>
+        <RouterLink to="/notes" @click="closeNav">Notes</RouterLink>
+        <RouterLink to="/reseaux" @click="closeNav">Réseaux</RouterLink>
       </nav>
 
       <div class="nav-actions">
@@ -96,8 +121,68 @@ watch(() => route.path, () => {
           <span class="lang-sep">/</span>
           <button class="lang-btn">EN</button>
         </div>
-        <a href="#cta-final" class="nav-cta">Collaborer</a>
+        <button
+          class="theme-toggle"
+          type="button"
+          :aria-label="themeLabel"
+          :title="themeLabel"
+          @click="toggleTheme"
+        >
+          <svg v-if="theme === 'dark'" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+          </svg>
+          <svg v-else viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A8.6 8.6 0 0 1 11.2 3a7 7 0 1 0 9.8 9.8z"></path>
+          </svg>
+        </button>
+        <a href="/#cta-final" class="nav-cta" @click="closeNav">Rejoindre</a>
+        <button
+          class="nav-toggle"
+          type="button"
+          :aria-expanded="navOpen"
+          aria-controls="mobile-nav"
+          aria-label="Ouvrir le menu"
+          @click="navOpen = !navOpen"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
+
+      <nav id="mobile-nav" class="mobile-nav" :class="{ open: navOpen }" aria-label="Navigation mobile">
+        <RouterLink to="/instance" @click="closeNav">Instance</RouterLink>
+        <RouterLink to="/theatres" @click="closeNav">Théâtres</RouterLink>
+        <RouterLink to="/methode" @click="closeNav">Méthode</RouterLink>
+        <RouterLink to="/notes" @click="closeNav">Notes</RouterLink>
+        <RouterLink to="/reseaux" @click="closeNav">Réseaux</RouterLink>
+        <button class="mobile-theme-toggle" type="button" @click="toggleTheme">
+          <span>{{ theme === 'dark' ? 'Mode clair' : 'Mode sombre' }}</span>
+          <svg v-if="theme === 'dark'" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+          </svg>
+          <svg v-else viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A8.6 8.6 0 0 1 11.2 3a7 7 0 1 0 9.8 9.8z"></path>
+          </svg>
+        </button>
+        <a href="/#cta-final" class="mobile-nav-cta" @click="closeNav">Rejoindre</a>
+      </nav>
     </header>
 
     <main>
@@ -112,44 +197,43 @@ watch(() => route.path, () => {
           <div class="footer-brand">
             <div class="nav-logo footer-logo-mark">
               <div class="logo-icon">
-                <img src="/logo/logo.png" alt="Vu du Cameroun" class="logo-image" />
+                <img :src="logoSrc" alt="Vu du Cameroun" class="logo-image" />
               </div>
               <div class="logo-text">
                 <span class="logo-name">Vu du Cameroun</span>
-                <span class="logo-sub">Eclairer l'invisible. Maitriser le réel.</span>
+                <span class="logo-sub">Éclairer. Former. Agir.</span>
               </div>
             </div>
             <p class="footer-tagline">
-              Eclairer l'invisible.<br />Maitriser le réel.
+              Éclairer l'invisible.<br />Construire le réel.
             </p>
             <div class="footer-social">
-              <a href="#" class="social-link" aria-label="Twitter/X">
+              <a href="mailto:contact@vuducameroun.org" class="social-link" aria-label="Contact général">
                 <svg viewBox="0 0 24 24">
-                  <path
-                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
-                  ></path>
+                  <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                  <path d="m3 7 9 6 9-6"></path>
                 </svg>
               </a>
-              <a href="#" class="social-link" aria-label="LinkedIn">
+              <a href="mailto:partenariat@vuducameroun.org" class="social-link" aria-label="Partenariats">
                 <svg viewBox="0 0 24 24">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                  <rect x="2" y="9" width="4" height="12"></rect>
-                  <circle cx="4" cy="4" r="2"></circle>
+                  <path d="M8 12h8"></path>
+                  <path d="M12 8v8"></path>
+                  <circle cx="12" cy="12" r="9"></circle>
                 </svg>
               </a>
-              <a href="#" class="social-link" aria-label="Facebook">
+              <a href="/#cta-final" class="social-link" aria-label="Adhérer">
                 <svg viewBox="0 0 24 24">
-                  <path
-                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-                  ></path>
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9.5" cy="7" r="4"></circle>
+                  <path d="M19 8v6"></path>
+                  <path d="M22 11h-6"></path>
                 </svg>
               </a>
-              <a href="#" class="social-link" aria-label="YouTube">
+              <a href="mailto:presse@vuducameroun.org" class="social-link" aria-label="Presse">
                 <svg viewBox="0 0 24 24">
-                  <path
-                    d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"
-                  ></path>
-                  <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon>
+                  <path d="M4 19.5V5a2 2 0 0 1 2-2h11v18H6a2 2 0 0 1-2-1.5z"></path>
+                  <path d="M8 7h5"></path>
+                  <path d="M8 11h6"></path>
                 </svg>
               </a>
             </div>
@@ -159,39 +243,39 @@ watch(() => route.path, () => {
             <h5>Navigation</h5>
             <ul>
               <li><RouterLink to="/instance">Instance</RouterLink></li>
-              <li><a href="/#domains">Théâtres</a></li>
-              <li><a href="/#approach">Doctrine</a></li>
-              <li><a href="/#publications">Notes</a></li>
-              <li><a href="/#partners">Réseaux</a></li>
+              <li><RouterLink to="/theatres">Théâtres</RouterLink></li>
+              <li><RouterLink to="/methode">Méthode</RouterLink></li>
+              <li><RouterLink to="/notes">Notes</RouterLink></li>
+              <li><RouterLink to="/reseaux">Réseaux</RouterLink></li>
             </ul>
           </div>
 
           <div class="footer-col">
             <h5>Ressources</h5>
             <ul>
-              <li><a href="#">Analyses stratégiques</a></li>
-              <li><a href="#">Prises de position</a></li>
-              <li><a href="#">Notes</a></li>
-              <li><a href="#">Adhérer</a></li>
-              <li><a href="#">Presse</a></li>
+              <li><RouterLink to="/notes">Notes citoyennes</RouterLink></li>
+              <li><RouterLink to="/theatres">Théâtres jeunesse</RouterLink></li>
+              <li><RouterLink to="/reseaux">Réseaux partenaires</RouterLink></li>
+              <li><a href="/#cta-final">Adhérer</a></li>
+              <li><a href="mailto:presse@vuducameroun.org">Presse</a></li>
             </ul>
           </div>
 
           <div class="footer-col">
             <h5>Contact</h5>
             <div class="footer-contact-item"><span>Siège</span><span>Yaoundé, Cameroun</span></div>
-            <div class="footer-contact-item"><span>Général</span><span>contact@vuducameroun.org</span></div>
+            <div class="footer-contact-item"><span>Dynamique</span><span>contact@vuducameroun.org</span></div>
             <div class="footer-contact-item"><span>Partenariats</span><span>partenariat@vuducameroun.org</span></div>
             <div class="footer-contact-item"><span>Presse</span><span>presse@vuducameroun.org</span></div>
           </div>
         </div>
 
         <div class="footer-bottom">
-          <p>2026 Vu du Cameroun. <span>Tous droits réservés.</span></p>
+          <p>2026 Vu du Cameroun. <span>Mouvement citoyen apolitique.</span></p>
           <div class="footer-legal">
-            <a href="#">Mentions légales</a>
-            <a href="#">Politique de confidentialité</a>
-            <a href="#">Conditions d'utilisation</a>
+            <RouterLink to="/mentions-legales">Mentions légales</RouterLink>
+            <RouterLink to="/politique-confidentialite">Politique de confidentialité</RouterLink>
+            <RouterLink to="/conditions-utilisation">Conditions d'utilisation</RouterLink>
           </div>
         </div>
       </div>

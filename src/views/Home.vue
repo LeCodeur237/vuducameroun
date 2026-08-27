@@ -8,39 +8,40 @@ onMounted(() => {
 })
 
 const tickerItems = [
-  'Influence Politique',
-  'Développement Économique',
-  'Jeunesse & Leadership',
-  'Partenariats Internationaux',
-  'Think Tank Africain',
-  'Strategic Influence Network',
-  'African Policy Research',
-  'Cameroon — World Gateway',
+  'Dynamique Génération Citoyenne',
+  'Jeunesse Citoyenne',
+  'Paix & Unité Nationale',
+  'Vigilance Numérique',
+  'Made in Cameroon',
+  'Insertion Socio-professionnelle',
+  'Action Communautaire',
+  'Éthique Républicaine',
+  'Afrique Internationale en Mouvement',
 ]
 
 const domains = [
   {
     num: '01',
-    title: 'Influence Politique',
-    text: "Nous structurons des positions stratégiques, alimentons le débat public et fournissons aux décideurs les instruments analytiques nécessaires à une gouvernance éclairée.",
+    title: 'Éveil civique',
+    text: "Nous formons une jeunesse consciente de ses devoirs républicains, attachée à la paix, à l'unité nationale et à la communion des peuples.",
     icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><rect x="9" y="12" width="6" height="10" rx="1"></rect>',
   },
   {
     num: '02',
-    title: 'Développement Économique',
-    text: "Catalyseur de politiques économiques ambitieuses, nous connectons la rigueur analytique à l'intelligence des marchés pour bâtir une prospérité durable.",
+    title: 'Insertion économique',
+    text: "Nous libérons le potentiel économique des jeunes par l'entrepreneuriat, le Made in Cameroon, les formations utiles et les passerelles vers l'emploi.",
     icon: '<line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>',
   },
   {
     num: '03',
-    title: 'Jeunesse & Leadership',
-    text: "Nous structurons une nouvelle génération de décideurs - des esprits façonnés pour l'excellence stratégique et la souveraineté nationale.",
+    title: 'Leadership de terrain',
+    text: "Nous préparons des cadres compétents, patriotes, responsables et intègres, capables d'agir dans leurs communautés avant de parler au nom d'elles.",
     icon: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>',
   },
   {
     num: '04',
-    title: 'Partenariats Internationaux',
-    text: "Interface entre le Cameroun et ses partenaires stratégiques mondiaux - nous construisons des ponts entre souverainetés, institutions et investisseurs.",
+    title: 'Coopération utile',
+    text: "Nous travaillons avec l'État, les CTD, les institutions, la diaspora et les partenaires au développement autour d'initiatives concrètes.",
     icon: '<circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path>',
   },
 ]
@@ -48,69 +49,78 @@ const domains = [
 const aboutCards = [
   {
     title: 'Vision',
-    text: "Faire du Cameroun une référence de gouvernance stratégique, d'innovation politique et de rayonnement continental.",
+    text: "Constituer une force de proposition et d'action citoyenne capable de dynamiser les transformations sociales positives de la jeunesse.",
     icon: '<path d="M2 12L12 2l10 10M5 9.5V20h14V9.5"></path><path d="M9 20v-8h6v8"></path>',
   },
   {
     title: 'Mission',
-    text: "Produire et diffuser des analyses stratégiques, structurer des réseaux d'influence et catalyser des décisions qui transforment durablement le tissu national.",
+    text: "Éduquer, former, connecter et mobiliser les jeunes pour préserver la paix, défendre l'intérêt général et contribuer au développement durable.",
     icon: '<circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path>',
   },
   {
     title: 'Positionnement',
-    text: "À l'intersection du think tank et du réseau d'influence : nous pensons, nous connectons, nous agissons. Une présence à la fois discrète et déterminante.",
+    text: "Une plateforme citoyenne, apolitique et formatrice, complémentaire aux efforts publics et tournée vers l'impact mesurable.",
     icon: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>',
   },
   {
-    title: 'Réseau',
-    text: "Un écosystème de décideurs, d'intellectuels, d'entrepreneurs et de diplomates qui partagent une vision commune de l'excellence camerounaise.",
+    title: 'Communauté',
+    text: "Un mouvement de jeunes, de bénévoles, d'experts, d'entrepreneurs et d'aînés engagés autour d'une même exigence de service.",
     icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>',
   },
 ]
 
 const steps = [
-  { num: '01', title: 'Analyse', text: "Une lecture fine des dynamiques politiques, économiques et géopolitiques, nourrie par une veille permanente et une expertise pluridisciplinaire." },
-  { num: '02', title: 'Réseau', text: "L'activation d'un capital relationnel stratégique - des acteurs qui comptent, des décideurs qui tranchent, des partenaires qui s'engagent." },
-  { num: '03', title: 'Action', text: "Des interventions ciblées, des recommandations actionables, des initiatives produisant des effets mesurables sur les trajectoires nationales." },
-  { num: '04', title: 'Influence', text: "Un positionnement stratégique qui fait de Vu du Cameroun une référence incontournable dans le paysage décisionnel africain." },
+  { num: '01', title: 'Éclairer', text: "Lire les signaux faibles, écouter les silences sociaux et transformer les réalités invisibles en priorités d'action." },
+  { num: '02', title: 'Former', text: "Armer les jeunes contre l'apathie civique, la désinformation, les discours de haine et les vulnérabilités contemporaines." },
+  { num: '03', title: 'Agir', text: "Déployer des projets communautaires, humanitaires, techniques et économiques là où les besoins sont concrets." },
+  { num: '04', title: 'Construire', text: "Faire de l'engagement citoyen une discipline durable: responsabilité, mérite, bénévolat, création de valeur et cohésion nationale." },
 ]
 
 const intlStats = [
-  { num: '27+', label: 'Pays partenaires' },
-  { num: '5', label: 'Continents' },
-  { num: '150+', label: 'Experts mobilisés' },
-  { num: '10+', label: 'Institutions partenaires' },
+  { num: '03', label: 'Piliers' },
+  { num: '2023', label: 'Depuis' },
+  { num: '04', label: 'Échelles d’action' },
+  { num: 'National', label: 'International' },
 ]
 
 const publications = [
   {
-    tag: 'Analyse Stratégique',
-    title: "Repositionnement géopolitique du Cameroun dans l'espace francophone : enjeux, leviers et perspectives 2030.",
-    text: "Une analyse approfondie des transformations en cours et des instruments stratégiques à mobiliser pour consolider la position du Cameroun comme pivot régional d'influence.",
-    date: 'Mars 2025',
+    tag: 'Déclaration',
+    title: 'Déclaration de la Dynamique Vu du Cameroun : au nom de la jeunesse',
+    text: "La Dynamique Vu du Cameroun prend position au nom de la jeunesse face au tournant institutionnel de la Troisième République.",
+    date: '4 Avril 2026',
+    image: '/images/declaration-troisieme-republique-cameroun.jpg',
+    imageAlt: 'Mobilisation citoyenne au Cameroun',
+    slug: 'declaration-dynamique-vu-du-cameroun-au-nom-de-la-jeunesse',
     featured: true,
   },
   {
-    tag: 'Prise de position',
-    title: 'Les nouvelles architectures de financement du développement africain.',
-    text: 'Face aux reconfigurations des flux financiers mondiaux, quelles stratégies pour un financement souverain du développement ?',
-    date: 'Fév. 2025',
+    tag: 'Tribune',
+    title: "Crise migration : la société civile camerounaise aux marges d'un enjeu brûlant",
+    text: "Une tribune sur la migration, la fuite des compétences, les faux recrutements et la responsabilité stratégique de la société civile camerounaise.",
+    date: '21 février 2026',
+    image: '/images/crise-migration-image-pj.png',
+    imageAlt: "Famille face aux routes de l'exil",
+    slug: 'crise-migration-societe-civile-camerounaise-sommet-afrique-france-2026',
   },
   {
-    tag: 'Réflexion',
-    title: 'Leadership africain : refonder le rapport entre élites et souverainetés nationales.',
-    text: 'Vers un leadership endogène, enraciné et projectable : une réflexion sur les conditions de l\'excellence africaine.',
-    date: 'Jan. 2025',
+    tag: 'Analyse',
+    title: 'Vu de Yaoundé, le partenariat Cameroun - France en 2025',
+    text: "Une lecture camerounaise du partenariat avec la France: mémoire, économie, sécurité, jeunesse et bataille des récits.",
+    date: '9 janvier 2026',
+    image: '/images/partenariat-cameroun-france-2025.jpg',
+    imageAlt: 'Conférence de presse Cameroun France',
+    slug: 'vu-de-yaounde-partenariat-cameroun-france-en-2025',
   },
 ]
 
 const partnerCats = [
-  { title: 'Institutions', text: "Organisations internationales, institutions multilatérales, gouvernements et entités diplomatiques partageant notre vision d'un Cameroun influent sur la scène mondiale.", icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>' },
-  { title: 'Investisseurs', text: "Fonds souverains, groupes privés et investisseurs stratégiques engagés dans la construction d'un écosystème économique camerounais et africain de classe mondiale.", icon: '<line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>' },
-  { title: 'Organisations', text: "ONG stratégiques, think tanks partenaires, universités d'excellence et réseaux professionnels qui enrichissent notre écosystème de production et d'influence.", icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>' },
+  { title: 'Pouvoirs publics & CTD', text: "Une action complémentaire aux efforts de l'État, des collectivités territoriales décentralisées et des dispositifs publics de développement.", icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>' },
+  { title: 'Acteurs économiques', text: "Des partenaires techniques, financiers, industriels et entrepreneuriaux pour créer de la valeur au profit des jeunes.", icon: '<line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>' },
+  { title: 'Société civile & diaspora', text: "Des associations, experts, communautés locales et réseaux internationaux mobilisés pour la cohésion, la formation et l'action terrain.", icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>' },
 ]
 
-const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Cameroun', 'Inst. de Gouvernance', 'Réseau Francophone']
+const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'Collectifs jeunes']
 </script>
 
 <template>
@@ -122,23 +132,25 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
         <div class="hero-content">
           <div class="hero-eyebrow">
             <div class="hero-eyebrow-line"></div>
-            <span class="label">L'influence pour Developpement</span>
+            <span class="label">Dynamique Génération Citoyenne</span>
           </div>
           <h1 class="hero-title">
-            Penser le Cameroun.<br />
-            <em>Influencer</em><br />
-            l'avenir.
+            La jeunesse<br />
+            <em>citoyenne</em><br />
+            en action.
           </h1>
           <p class="hero-subtitle">
-            Une plateforme stratégique au service de la transformation nationale et du
-            positionnement international du Cameroun.
+            Vu du Cameroun est une association à portée nationale et internationale, active depuis
+            2023, qui porte une dynamique jeune, apolitique et républicaine pour former,
+            mobiliser et insérer une génération utile à la paix, à l'unité nationale et au
+            développement du Cameroun.
           </p>
           <div class="hero-actions">
-            <a href="#cta-final" class="btn-primary">Nous rejoindre</a>
-            <a href="#about" class="btn-ghost">Collaborer avec nous</a>
+            <a href="#cta-final" class="btn-primary">Entrer dans la dynamique</a>
+            <a href="#domains" class="btn-ghost">Découvrir nos axes</a>
           </div>
           <div class="hero-slogan">
-            <p>"Éclairer l'invisible. Maîtriser le réel."</p>
+            <p>"Éclairer l'invisible, écouter les silences, vitaliser l'inertie, ériger l'avenir."</p>
           </div>
         </div>
 
@@ -156,9 +168,9 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
             </div>
           </div>
           <div class="hero-stat-row">
-            <div class="hero-stat"><span class="hero-stat-num">27+</span><span class="hero-stat-label">Pays</span></div>
-            <div class="hero-stat"><span class="hero-stat-num">150+</span><span class="hero-stat-label">Experts</span></div>
-            <div class="hero-stat"><span class="hero-stat-num">5</span><span class="hero-stat-label">Domaines</span></div>
+            <div class="hero-stat"><span class="hero-stat-num">03</span><span class="hero-stat-label">Piliers</span></div>
+            <div class="hero-stat"><span class="hero-stat-num">2023</span><span class="hero-stat-label">Depuis</span></div>
+            <div class="hero-stat"><span class="hero-stat-num">04</span><span class="hero-stat-label">Théâtres</span></div>
           </div>
         </div>
       </div>
@@ -185,20 +197,20 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
         <div class="about-left">
           <div class="about-num" aria-hidden="true">01</div>
           <div class="about-content">
-            <div class="label reveal">À propos de nous</div>
+            <div class="label reveal">Le mouvement</div>
             <div class="gold-rule" style="margin: 1rem 0 1.5rem"></div>
             <h2 class="section-title reveal reveal-delay-1">
-              Un cercle d'<em>influence</em> au cœur de l'Afrique.
+              Une <em>dynamique</em> citoyenne au cœur du Cameroun.
             </h2>
             <p class="about-text reveal reveal-delay-2">
-              Vu du Cameroun est une dynamique d'influence stratégique qui articule analyse,
-              réseau et action pour positionner le Cameroun comme acteur central du devenir
-              africain et interlocuteur crédible sur la scène internationale.
+              La Dynamique Génération Citoyenne refuse l'apathie civique. Elle articule
+              formation intégrale, action communautaire, vigilance numérique et insertion
+              socio-professionnelle des jeunes.
             </p>
             <p class="about-text reveal reveal-delay-3">
-              Nous ne commentons pas le monde - nous le façonnons. Notre démarche est celle d'une
-              élite intellectuelle engagée, produisant de l'impact là où les décisions
-              structurent les trajectoires nationales.
+              Nous agissons dans l'esprit des mouvements citoyens africains contemporains:
+              structurés, pacifiques, enracinés, connectés au réel et complémentaires aux efforts
+              publics pour le développement.
             </p>
           </div>
         </div>
@@ -216,9 +228,9 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
   <section id="domains" class="section-pad">
     <div class="container">
       <div class="domains-header">
-        <div class="label reveal">Nos domaines d'action</div>
+        <div class="label reveal">Nos théâtres d'action</div>
         <h2 class="section-title reveal reveal-delay-1">
-          Là où l'<em>analyse</em> devient <em>levier</em>.
+          Là où la <em>conscience</em> devient <em>action</em>.
         </h2>
       </div>
       <div class="domains-grid reveal">
@@ -227,8 +239,8 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
           <div class="domain-icon" v-html="`<svg viewBox='0 0 24 24'>${d.icon}</svg>`"></div>
           <h3>{{ d.title }}</h3>
           <p>{{ d.text }}</p>
-          <a href="#" class="domain-link">
-            Explorer
+          <a href="#cta-final" class="domain-link">
+            Agir
             <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
           </a>
         </article>
@@ -241,14 +253,13 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
     <div class="container">
       <div class="approach-grid">
         <div class="approach-left">
-          <div class="label reveal">Notre approche stratégique</div>
+          <div class="label reveal">Notre méthode citoyenne</div>
           <div class="gold-rule" style="margin: 1rem 0 1.5rem"></div>
-          <h2 class="section-title reveal reveal-delay-1">Du savoir à l'<em>impact</em>.</h2>
+          <h2 class="section-title reveal reveal-delay-1">De l'éveil à l'<em>impact</em>.</h2>
           <p class="reveal reveal-delay-2 approach-text">
-            Notre méthodologie est celle d'une institution d'excellence : rigoureuse dans
-            l'analyse, agile dans l'exécution, déterminée dans l'influence. Chaque action
-            procède d'une logique d'ensemble qui transforme la connaissance en levier de
-            puissance.
+            Notre méthode transforme l'énergie de la jeunesse en discipline collective: comprendre
+            les vulnérabilités, former des responsables, agir sur le terrain et construire une
+            valeur économique et sociale durable.
           </p>
         </div>
         <div class="approach-steps reveal reveal-delay-2">
@@ -270,14 +281,14 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
   <section id="international" class="section-pad">
     <div class="container">
       <div class="intl-header">
-        <div class="label reveal">Dimension internationale</div>
+        <div class="label reveal">Portée nationale et internationale</div>
         <h2 class="section-title reveal reveal-delay-1">
-          Une <em>passerelle</em> entre le Cameroun et le monde.
+          Une <em>passerelle</em> entre terrain, diaspora et institutions.
         </h2>
         <p class="reveal reveal-delay-2" style="padding: 0 18rem">
-          Ancrés au Cameroun, connectés au monde. Notre réseau s'étend sur cinq continents,
-          reliant décideurs, institutions et partenaires stratégiques autour d'une vision
-          commune.
+          Association à portée nationale et internationale, Vu du Cameroun existe depuis 2023.
+          Ancrés au Cameroun, ouverts aux espaces CEMAC, Union Africaine et diaspora, nous
+          faisons circuler les compétences, les idées et les partenariats utiles à la jeunesse.
         </p>
       </div>
       <div class="map-container reveal">
@@ -304,14 +315,14 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
     <div class="container">
       <div class="pub-header">
         <div>
-          <div class="label reveal">Publications & Analyses</div>
+          <div class="label reveal">Notes & publications</div>
           <div class="gold-rule" style="margin: 1rem 0 1.5rem"></div>
           <h2 class="section-title reveal reveal-delay-1">
-            L'intelligence au service de l'<em>action</em>.
+            L'engagement au service de l'<em>intérêt général</em>.
           </h2>
         </div>
-        <a href="#" class="pub-all-link reveal">
-          <span>Toutes les publications</span>
+        <a href="/notes" class="pub-all-link reveal">
+          <span>Voir les chantiers</span>
           <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
         </a>
       </div>
@@ -322,13 +333,16 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
           class="pub-card"
           :class="{ featured: p.featured }"
         >
+          <div class="pub-image">
+            <img :src="p.image" :alt="p.imageAlt" loading="lazy" decoding="async" />
+          </div>
           <div class="pub-tag">{{ p.tag }}</div>
           <h3>{{ p.title }}</h3>
           <p>{{ p.text }}</p>
           <div class="pub-meta">
             <span class="pub-date">{{ p.date }}</span>
-            <a href="#" class="pub-read">
-              <span>Lire{{ p.featured ? " l'analyse" : '' }}</span>
+            <a :href="`/notes/${p.slug}`" class="pub-read">
+              <span>Explorer</span>
               <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
             </a>
           </div>
@@ -342,15 +356,15 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
       <div class="partners-header">
         <div class="partners-kicker reveal">
           <span class="partners-kicker-dot" aria-hidden="true"></span>
-          <div class="label">Partenariats</div>
+          <div class="label">Réseaux utiles</div>
           <span class="partners-kicker-ring" aria-hidden="true"></span>
         </div>
         <h2 class="section-title partners-title reveal reveal-delay-1">
-          <span>Un réseau d'<em>alliances</em></span><span>stratégiques.</span>
+          <span>Un front d'<em>alliances</em></span><span>citoyennes.</span>
         </h2>
         <p class="partners-intro reveal reveal-delay-2">
-          Nous consolidons des partenariats avec les institutions, investisseurs et
-          organisations qui partagent notre ambition pour le Cameroun et l'Afrique.
+          Nous fédérons institutions, collectivités, acteurs économiques, société civile et
+          diaspora autour d'une même priorité: donner aux jeunes des cadres d'action crédibles.
         </p>
       </div>
       <div class="partners-categories reveal">
@@ -372,19 +386,18 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
     <div class="cta-bg-text" aria-hidden="true">VDC</div>
     <div class="container">
       <div class="cta-inner">
-        <div class="label reveal">Rejoignez le cercle</div>
+        <div class="label reveal">Rejoignez la dynamique</div>
         <div class="gold-rule" style="margin: 1.5rem auto; display: block"></div>
         <h2 class="section-title reveal reveal-delay-1">
-          Construisons l'avenir du<br />Cameroun <em>ensemble</em>.
+          Construisons le réel<br />avec la <em>jeunesse</em>.
         </h2>
         <p class="reveal reveal-delay-2">
-          Vous êtes décideur, intellectuel, entrepreneur, diplomate ou investisseur. Vous
-          partagez l'ambition d'un Cameroun souverain et influent. Rejoignez un cercle
-          d'excellence qui façonne les trajectoires qui comptent.
+          Vous êtes jeune leader, bénévole, formateur, entrepreneur, responsable communautaire,
+          institution ou partenaire. Rejoignez une dynamique d'éthique, de service et d'impact.
         </p>
         <div class="cta-actions reveal reveal-delay-3">
           <a href="mailto:contact@vuducameroun.org" class="btn-primary">Nous rejoindre</a>
-          <a href="mailto:partenariat@vuducameroun.org" class="btn-ghost">Proposer un partenariat</a>
+          <a href="mailto:partenariat@vuducameroun.org" class="btn-ghost">Porter un projet</a>
         </div>
       </div>
     </div>
@@ -406,12 +419,10 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .hero-bg {
-  background: radial-gradient(
-      ellipse 80% 60% at 60% 50%,
-      rgba(201, 168, 76, 0.06) 0,
-      transparent 70%
-    ),
-    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201, 168, 76, 0.04) 0, transparent 60%);
+  background:
+    linear-gradient(115deg, rgba(31, 182, 109, 0.11), transparent 32%),
+    linear-gradient(245deg, rgba(217, 58, 53, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(201, 168, 76, 0.08), transparent 72%);
 }
 
 .hero-bg,
@@ -421,17 +432,20 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .hero-grid {
-  background-image: linear-gradient(var(--white-faint) 1px, transparent 1px),
-    linear-gradient(90deg, var(--white-faint) 1px, transparent 1px);
+  background-image:
+    linear-gradient(var(--white-faint) 1px, transparent 1px),
+    linear-gradient(90deg, var(--white-faint) 1px, transparent 1px),
+    linear-gradient(135deg, transparent 0 48%, rgba(31, 182, 109, 0.08) 48% 49%, transparent 49%),
+    linear-gradient(45deg, transparent 0 51%, rgba(217, 58, 53, 0.07) 51% 52%, transparent 52%);
   background-size: 80px 80px;
-  opacity: 0.03;
+  opacity: 0.08;
 }
 
 .hero-inner {
   align-items: center;
   display: grid;
-  gap: 6rem;
-  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 0.85fr);
   position: relative;
   width: 100%;
   z-index: 2;
@@ -449,16 +463,16 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .hero-eyebrow-line {
-  background: var(--gold);
+  background: linear-gradient(90deg, var(--green), var(--gold), var(--red));
   height: 1px;
-  width: 30px;
+  width: 44px;
 }
 
 .hero-title {
-  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  font-size: clamp(3rem, 5.2vw, 6.2rem);
   font-weight: 300;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  letter-spacing: 0;
+  line-height: 0.98;
   margin: 0 0 2rem;
 }
 
@@ -481,7 +495,7 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 
 .hero-subtitle {
   margin-bottom: 3rem;
-  max-width: 440px;
+  max-width: 620px;
 }
 
 .cta-actions,
@@ -494,7 +508,7 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .hero-slogan {
-  border-top: 1px solid var(--grey-dark);
+  border-top: 1px solid var(--gold-line);
   margin-top: 4rem;
   padding-top: 2rem;
 }
@@ -546,7 +560,7 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 .globe-svg-container {
   align-items: center;
   background: radial-gradient(circle at 35% 35%, #1a1a1a, #080808);
-  border: 1px solid var(--grey-dark);
+  border: 1px solid var(--gold-line);
   border-radius: 50%;
   display: flex;
   height: 100%;
@@ -576,8 +590,10 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .hero-stat-row {
-  background: var(--black-3);
-  border: 1px solid var(--grey-dark);
+  background:
+    linear-gradient(90deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.06), rgba(217, 58, 53, 0.07)),
+    var(--black-3);
+  border: 1px solid var(--gold-line);
   bottom: -2.75rem;
   display: flex;
   gap: 3rem;
@@ -654,7 +670,7 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .ticker-bar {
-  background: var(--gold);
+  background: linear-gradient(90deg, var(--green), var(--gold), var(--red));
   overflow: hidden;
   padding: 0.65rem 0;
 }
@@ -679,7 +695,7 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .ticker-dot {
-  background: var(--black);
+  background: currentColor;
   border-radius: 50%;
   flex-shrink: 0;
   height: 4px;
@@ -703,7 +719,7 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .about-grid {
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
 }
 
 .about-left {
@@ -723,9 +739,9 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .section-title {
-  font-size: clamp(2.5rem, 4vw, 4.5rem);
+  font-size: clamp(2.35rem, 3.4vw, 4.1rem);
   font-weight: 300;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 1.1;
 }
 
@@ -736,7 +752,7 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 
 .about-cards {
   display: grid;
-  gap: 1.5rem;
+  gap: 1rem;
   grid-template-columns: 1fr 1fr;
 }
 
@@ -744,8 +760,11 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 .domain-card,
 .partner-cat,
 .pub-card {
-  background: var(--black-3);
+  background:
+    linear-gradient(180deg, rgba(245, 242, 236, 0.018), transparent 42%),
+    var(--black-3);
   border: 1px solid var(--grey-dark);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
   overflow: hidden;
   position: relative;
 }
@@ -755,7 +774,7 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .about-card::before {
-  background: var(--gold);
+  background: linear-gradient(180deg, var(--green), var(--gold), var(--red));
   content: '';
   height: 100%;
   left: 0;
@@ -769,6 +788,26 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 
 .about-card:hover::before {
   transform: scaleY(1);
+}
+
+.domain-card::before,
+.partner-cat::before,
+.pub-card::before {
+  background: linear-gradient(90deg, var(--green), var(--gold), var(--red));
+  content: '';
+  height: 2px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 0.3s;
+}
+
+.domain-card:hover::before,
+.partner-cat:hover::before,
+.pub-card:hover::before {
+  opacity: 1;
 }
 
 .about-card-icon {
@@ -884,23 +923,20 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .domains-grid {
-  border: 1px solid var(--grey-dark);
   display: grid;
+  gap: 1rem;
   grid-template-columns: repeat(4, 1fr);
 }
 
 .domain-card {
-  border-right: 1px solid var(--grey-dark);
-  padding: 3.5rem 2.5rem;
+  padding: 2.6rem 2rem;
   transition: background 0.4s;
 }
 
-.domain-card:last-child {
-  border-right: none;
-}
-
 .domain-card:hover {
-  background: var(--black-2);
+  background:
+    linear-gradient(180deg, rgba(31, 182, 109, 0.04), rgba(201, 168, 76, 0.025), rgba(217, 58, 53, 0.035)),
+    var(--black-2);
 }
 
 .domain-num {
@@ -942,14 +978,20 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .section-approach {
-  background: var(--black-3);
+  background:
+    linear-gradient(110deg, rgba(31, 182, 109, 0.055), transparent 35%),
+    linear-gradient(250deg, rgba(217, 58, 53, 0.045), transparent 34%),
+    var(--black-3);
   overflow: hidden;
   position: relative;
 }
 
 .approach-bg {
-  background: radial-gradient(circle, rgba(201, 168, 76, 0.05) 0, transparent 70%);
-  border-radius: 50%;
+  background:
+    repeating-linear-gradient(90deg, rgba(201, 168, 76, 0.08) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(0deg, rgba(245, 242, 236, 0.035) 0 1px, transparent 1px 26px);
+  border: 1px solid rgba(201, 168, 76, 0.06);
+  border-radius: 0;
   height: 600px;
   inset: 50% auto auto 50%;
   pointer-events: none;
@@ -971,7 +1013,7 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .approach-step {
-  border-bottom: 1px solid var(--grey-dark);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.16);
   display: flex;
   gap: 2rem;
   padding: 2.5rem 0;
@@ -1027,8 +1069,10 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .map-container {
-  background: var(--black-3);
-  border: 1px solid var(--grey-dark);
+  background:
+    linear-gradient(90deg, rgba(31, 182, 109, 0.04), transparent 40%, rgba(217, 58, 53, 0.04)),
+    var(--black-3);
+  border: 1px solid var(--gold-line);
   overflow: hidden;
 }
 
@@ -1090,7 +1134,8 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .pub-header .section-title {
-  padding: 0 30rem 0 0;
+  max-width: 760px;
+  padding: 0;
 }
 
 .pub-all-link {
@@ -1113,26 +1158,49 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .pub-grid {
-  border: 1px solid var(--grey-dark);
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .pub-card {
-  border-right: 1px solid var(--grey-dark);
-  padding: 3rem;
+  padding: 1.25rem;
 }
 
-.pub-card:last-child {
-  border-right: none;
+.pub-image {
+  background:
+    linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.08), rgba(217, 58, 53, 0.07)),
+    var(--black-2);
+  border: 1px solid var(--gold-line);
+  aspect-ratio: 16 / 10;
+  height: auto;
+  margin: 0 0 1.5rem;
+  overflow: hidden;
+}
+
+.pub-image img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0.78;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+  width: 100%;
+}
+
+.pub-card:hover .pub-image img {
+  opacity: 0.95;
+  transform: scale(1.04);
 }
 
 .pub-card.featured {
-  background: linear-gradient(180deg, #c9a84c0a, #0f0f0fcc);
+  background:
+    linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.1), rgba(217, 58, 53, 0.07)),
+    #0f0f0fcc;
 }
 
 .pub-card h3 {
-  font-size: 1.55rem;
+  font-size: 1.35rem;
   line-height: 1.35;
   margin-bottom: 1rem;
 }
@@ -1175,12 +1243,7 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .partner-cat {
-  border-right: 1px solid var(--grey-dark);
-  padding: 3rem;
-}
-
-.partner-cat:last-child {
-  border-right: none;
+  padding: 2.4rem;
 }
 
 .partner-cat-icon {
@@ -1190,21 +1253,19 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .partner-logos {
-  border: 1px solid var(--grey-dark);
   display: grid;
+  gap: 1rem;
   grid-template-columns: repeat(6, 1fr);
   margin-top: 1.5rem;
 }
 
 .partner-logo {
-  background: var(--black-3);
-  border-right: 1px solid var(--grey-dark);
+  background:
+    linear-gradient(180deg, rgba(201, 168, 76, 0.035), transparent),
+    var(--black-3);
+  border: 1px solid var(--grey-dark);
   padding: 1.25rem 1rem;
   text-align: center;
-}
-
-.partner-logo:last-child {
-  border-right: none;
 }
 
 .partner-logo span {
@@ -1216,6 +1277,9 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 }
 
 .section-cta {
+  background:
+    linear-gradient(120deg, rgba(31, 182, 109, 0.06), transparent 36%),
+    linear-gradient(240deg, rgba(217, 58, 53, 0.05), transparent 34%);
   overflow: hidden;
   position: relative;
   text-align: center;
@@ -1244,5 +1308,14 @@ const partnerLogos = ['Union Africaine', 'CEMAC', 'Banque Africaine', 'PNUD Came
 .cta-inner p {
   margin: 0 auto 2rem;
   max-width: 720px;
+}
+
+@media (max-width: 1080px) {
+  .intl-header p,
+  .partners-intro,
+  .pub-header .section-title {
+    padding: 0 !important;
+  }
+
 }
 </style>

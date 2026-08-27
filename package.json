@@ -1,7 +1,16 @@
 {
-  "name": "vite-vue-typescript-starter",
+  "name": "vuducameroun",
   "private": true,
   "version": "0.0.0",
+  "description": "Site vitrine de Vu du Cameroun, dynamique citoyenne camerounaise moderne centrée sur la jeunesse, la paix et l'action communautaire.",
+  "keywords": [
+    "vue",
+    "vite",
+    "cameroun",
+    "jeunesse",
+    "mouvement-citoyen",
+    "civisme"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",

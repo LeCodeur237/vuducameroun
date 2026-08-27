@@ -5,26 +5,61 @@
     <link rel="icon" type="image/png" href="/logo/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#080808" />
+    <meta name="color-scheme" content="dark light" />
     <meta
       name="description"
-      content="Vu du Cameroun est une dynamique d'influence stratégique, un think tank africain connectant le Cameroun au monde. Éclairer l'invisible. Maîtriser le réel."
+      content="Vu du Cameroun porte une dynamique citoyenne moderne pour former, mobiliser et insérer la jeunesse au service de la paix, de l'unité nationale et du développement."
     />
     <meta
       name="keywords"
-      content="think tank Cameroun, influence stratégique, Afrique, diplomatie, développement, leadership"
+      content="mouvement citoyen Cameroun, jeunesse camerounaise, civisme, paix, unité nationale, Made in Cameroon, insertion des jeunes"
     />
     <meta name="author" content="Vu du Cameroun" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://vuducameroun.org/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap"
     />
-    <title>Vu du Cameroun — Think Tank Stratégique Africain</title>
-    <meta property="og:image" content="https://bolt.new/static/og_default.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
-</head>
+    <title>Vu du Cameroun — Dynamique Citoyenne Camerounaise</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_CM" />
+    <meta property="og:site_name" content="Vu du Cameroun" />
+    <meta property="og:title" content="Vu du Cameroun — Dynamique Citoyenne Camerounaise" />
+    <meta
+      property="og:description"
+      content="Une dynamique citoyenne moderne pour former, mobiliser et insérer la jeunesse camerounaise au service de la paix, de l'unité nationale et du développement."
+    />
+    <meta property="og:url" content="https://vuducameroun.org/" />
+    <meta property="og:image" content="https://vuducameroun.org/logo/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Vu du Cameroun — Dynamique Citoyenne Camerounaise" />
+    <meta
+      name="twitter:description"
+      content="Éclairer. Former. Agir. Une dynamique citoyenne camerounaise moderne au service de la jeunesse."
+    />
+    <meta name="twitter:image" content="https://vuducameroun.org/logo/logo.png" />
+    <script>
+      ;(() => {
+        try {
+          const stored = localStorage.getItem('vdc-theme')
+          const theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark'
+          document.documentElement.dataset.theme = theme
+          document.documentElement.style.colorScheme = theme
+        } catch {
+          document.documentElement.dataset.theme = 'dark'
+          document.documentElement.style.colorScheme = 'dark'
+        }
+      })()
+    </script>
+  </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
