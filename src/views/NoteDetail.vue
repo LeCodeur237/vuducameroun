@@ -2,6 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useReveal } from '../composables/useReveal'
+import { loadManagedNotes, type PublicNote } from '../data/notes'
 
 type ApiNote = {
   author?: string
@@ -35,6 +36,13 @@ const { observe } = useReveal()
 const loading = ref(true)
 const error = ref('')
 const note = ref<Note | null>(null)
+const noteHeroStyle = computed(() =>
+  note.value
+    ? {
+        backgroundImage: `linear-gradient(180deg, rgba(8, 8, 8, 0.62), rgba(8, 8, 8, 0.86)), linear-gradient(90deg, rgba(8, 8, 8, 0.42), rgba(201, 168, 76, 0.15), rgba(8, 8, 8, 0.42)), url('${note.value.image}')`,
+      }
+    : undefined
+)
 
 const fallbackNotes: Record<string, Note> = {
   'declaration-dynamique-vu-du-cameroun-au-nom-de-la-jeunesse': {
@@ -375,6 +383,17 @@ const normalizeNote = (payload: ApiNote, fallback?: Note): Note => ({
   title: payload.title || fallback?.title || 'Note citoyenne',
 })
 
+const noteFromManaged = (managedNote: PublicNote, fallback?: Note): Note => ({
+  author: managedNote.author || fallback?.author || 'Vu du Cameroun',
+  contentHtml: managedNote.contentHtml || fallback?.contentHtml || `<p>${managedNote.text}</p>`,
+  date: managedNote.date || fallback?.date || 'Publication',
+  excerpt: managedNote.text || fallback?.excerpt || '',
+  image: managedNote.image || fallback?.image || '/images/carte.png',
+  sourceUrl: managedNote.sourceUrl || fallback?.sourceUrl || '',
+  tag: managedNote.tag || fallback?.tag || 'Note',
+  title: managedNote.title || fallback?.title || 'Note citoyenne',
+})
+
 const sanitizeQuillHtml = (html: string) => {
   const allowedTags = new Set([
     'A',
@@ -434,7 +453,16 @@ const relatedNotes = computed(() =>
 const fetchNote = async () => {
   loading.value = true
   error.value = ''
-  const fallback = fallbackNotes[slug.value]
+  const staticFallback = fallbackNotes[slug.value]
+  const managedFallback = loadManagedNotes().find((storedNote) => storedNote.slug === slug.value)
+  if (managedFallback?.published === false) {
+    note.value = null
+    error.value = "Cette note n'est pas disponible pour le moment."
+    loading.value = false
+    return
+  }
+
+  const fallback = managedFallback ? noteFromManaged(managedFallback, staticFallback) : staticFallback
 
   const baseUrl = import.meta.env.VITE_API_BASE_URL || ''
   const endpoint = import.meta.env.VITE_NOTES_ENDPOINT || '/api/notes'
@@ -464,14 +492,8 @@ watch(slug, fetchNote)
 <template>
   <main class="note-detail-page">
     <section class="note-detail-hero section-pad">
-      <div class="note-detail-bg" aria-hidden="true"></div>
+      <div class="note-detail-bg" :style="noteHeroStyle" aria-hidden="true"></div>
       <div class="container">
-        <div class="note-detail-breadcrumb reveal visible">
-          <RouterLink to="/">Accueil</RouterLink>
-          <span>›</span>
-          <RouterLink to="/notes">Notes</RouterLink>
-        </div>
-
         <div v-if="loading" class="note-state">Chargement de la note...</div>
         <div v-else-if="error" class="note-state">
           <p>{{ error }}</p>
@@ -479,24 +501,19 @@ watch(slug, fetchNote)
         </div>
 
         <article v-else-if="note" class="note-detail-layout">
-          <div class="note-detail-cover">
-            <img :src="note.image" :alt="note.title" loading="eager" decoding="async" />
-          </div>
-
           <div class="note-detail-copy">
-            <div class="note-detail-meta">
-              <span>{{ note.tag }}</span>
-              <span>{{ note.date }}</span>
-              <span>{{ note.author }}</span>
-            </div>
             <h1>{{ note.title }}</h1>
             <p class="note-detail-excerpt">{{ note.excerpt }}</p>
+            <div class="page-hero-actions reveal reveal-delay-3">
+              <a href="#note-content" class="btn-primary">Lire</a>
+              <RouterLink to="/notes" class="btn-ghost">Toutes les notes</RouterLink>
+            </div>
           </div>
         </article>
       </div>
     </section>
 
-    <section v-if="note && !loading" class="section-pad note-content-section">
+    <section v-if="note && !loading" id="note-content" class="section-pad note-content-section">
       <div class="container">
         <div class="note-content-shell">
           <aside class="note-content-aside">
@@ -532,32 +549,42 @@ watch(slug, fetchNote)
 }
 
 .note-detail-hero {
+  align-items: center;
   background: var(--black);
   border-bottom: 1px solid var(--grey-dark);
+  color: #f5f2ec;
+  display: flex;
+  height: 500px;
+  max-height: 500px;
+  min-height: 500px;
   overflow: hidden;
-  padding-top: 10rem;
+  padding: 3.5rem 0;
   position: relative;
 }
 
 .note-detail-bg {
   background:
-    linear-gradient(120deg, rgba(31, 182, 109, 0.1), transparent 34%),
-    linear-gradient(245deg, rgba(217, 58, 53, 0.08), transparent 36%),
-    repeating-linear-gradient(90deg, var(--white-faint) 0 1px, transparent 1px 88px);
+    linear-gradient(180deg, rgba(8, 8, 8, 0.62), rgba(8, 8, 8, 0.86)),
+    linear-gradient(90deg, rgba(8, 8, 8, 0.42), rgba(201, 168, 76, 0.15), rgba(8, 8, 8, 0.42)),
+    url('/images/declaration-troisieme-republique-cameroun.jpg') top center / cover no-repeat;
+  background-attachment: fixed;
+  background-position: top center;
+  background-size: cover;
   inset: 0;
-  opacity: 0.45;
   position: absolute;
 }
 
 .note-detail-breadcrumb {
   align-items: center;
-  color: var(--grey-light);
+  color: rgba(245, 242, 236, 0.76);
   display: flex;
   font-family: 'Syne', sans-serif;
   font-size: 0.68rem;
   gap: 0.7rem;
   letter-spacing: 0.16em;
-  margin-bottom: 4rem;
+  border-bottom: 1px solid var(--gold-line);
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
   position: relative;
   text-transform: uppercase;
   z-index: 1;
@@ -569,12 +596,15 @@ watch(slug, fetchNote)
 
 .note-detail-layout {
   display: block;
+  margin: 0 auto;
+  max-width: 1160px;
   position: relative;
+  text-align: center;
   z-index: 1;
 }
 
 .note-detail-copy {
-  margin-top: 3rem;
+  margin-top: 0;
   max-width: none;
 }
 
@@ -582,6 +612,7 @@ watch(slug, fetchNote)
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
+  justify-content: center;
   margin-bottom: 1.5rem;
 }
 
@@ -597,18 +628,18 @@ watch(slug, fetchNote)
 }
 
 .note-detail-copy h1 {
-  font-size: clamp(2.8rem, 5vw, 5.2rem);
+  font-size: clamp(2rem, 4.2vw, 4.2rem);
   font-weight: 300;
-  line-height: 1.04;
+  line-height: 0.98;
   margin: 0;
   max-width: none;
 }
 
 .note-detail-excerpt {
-  color: var(--white-dim);
+  color: rgba(245, 242, 236, 0.82);
   font-size: 1.04rem;
   line-height: 1.85;
-  margin: 2rem 0 0;
+  margin: 1.25rem auto 0;
   max-width: 900px;
 }
 

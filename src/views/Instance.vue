@@ -14,7 +14,6 @@ const manifestoNav = [
   { id: '#gouvernance', label: 'Gouvernance' },
   { id: '#valeurs', label: 'Principes' },
   { id: '#adn', label: 'Piliers' },
-  { id: '#equipe', label: 'Fondateurs' },
   { id: '#engagement', label: 'Adhésion' },
 ]
 
@@ -88,14 +87,6 @@ const figures = [
   { num: 'National', strong: 'Portée', span: 'Ouverture internationale' },
 ]
 
-const team = [
-  { initials: 'BL', name: 'Éric Léonel Loumou', role: 'Membre fondateur', text: "Garant de l'esprit fondateur, de la vision et des principes essentiels de la Dynamique." },
-  { initials: 'MG', name: 'Genéviève Mangondo', role: 'Membre fondatrice', text: "Contribue à la transmission des valeurs, de l'éthique et de l'exigence de service." },
-  { initials: 'MD', name: 'Dalami Mahaman', role: 'Membre fondateur', text: "Participe à l'ancrage républicain et à la continuité morale du mouvement." },
-  { initials: 'ON', name: 'Ongmetana Nadège Vanessa', role: 'Membre fondatrice', text: "Porte l'engagement pour une jeunesse responsable, formée et socialement utile." },
-  { initials: 'TB', name: 'Tezore .Bak', role: 'Membre fondateur', text: "Soutient l'organisation des énergies citoyennes autour de l'intérêt général." },
-]
-
 const engagements = [
   { title: 'Membres adhérents', text: "Soutenez les actions de la Dynamique et participez aux espaces de mobilisation citoyenne.", icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>' },
   { title: 'Membres actifs', text: "Engagez-vous au quotidien dans les structures de terrain, les formations et les projets communautaires.", icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>' },
@@ -109,31 +100,19 @@ const engagements = [
     <section id="about" class="about-hero section-pad">
       <div class="about-hero-bg" aria-hidden="true"></div>
       <div class="container">
-        <div class="about-hero-breadcrumb reveal">
-          <RouterLink to="/">Accueil</RouterLink>
-          <span>›</span>
-          <span class="current">Instance</span>
-        </div>
         <div class="about-hero-layout">
-          <div>
-            <div class="label reveal">D-GENECI</div>
-            <h1 class="about-hero-title reveal reveal-delay-1">
-              Une dynamique citoyenne<br />
-              <em>pour agir</em> avec la jeunesse.
-            </h1>
-          </div>
-          <div>
-            <p class="about-hero-desc reveal reveal-delay-2">
-              Dynamique Génération Citoyenne est une organisation citoyenne, apolitique,
-              éducative, formatrice et d'intérêt général, pensée pour transformer l'énergie de
-              la jeunesse en moteur de développement durable.
-            </p>
-            <div class="about-hero-stats reveal reveal-delay-3">
-              <div><span>Nature</span><strong>Apolitique</strong></div>
-              <div><span>Mission</span><strong>Former</strong></div>
-              <div><span>Terrain</span><strong>Agir</strong></div>
-              <div><span>Ancrage</span><strong>Cameroun</strong></div>
-            </div>
+          <h1 class="about-hero-title reveal reveal-delay-1">
+            Une dynamique citoyenne<br />
+            <em>pour agir</em> avec la jeunesse.
+          </h1>
+          <p class="about-hero-desc reveal reveal-delay-2">
+            Dynamique Génération Citoyenne est une organisation citoyenne, apolitique,
+            éducative, formatrice et d'intérêt général, pensée pour transformer l'énergie de
+            la jeunesse en moteur de développement durable.
+          </p>
+          <div class="page-hero-actions reveal reveal-delay-3">
+            <a href="#manifeste" class="btn-primary">Explorer</a>
+            <RouterLink to="/theatres" class="btn-ghost">Voir les théâtres</RouterLink>
           </div>
         </div>
       </div>
@@ -239,32 +218,6 @@ const engagements = [
       </div>
     </section>
 
-    <section id="equipe" class="section-pad section-dark">
-      <div class="container">
-        <div class="about-heading reveal">
-          <div class="gold-rule"></div>
-          <span class="label">Collège fondateur</span>
-          <h2>Les garants d'un <em>esprit</em>.</h2>
-          <p>
-            Les fondateurs garantissent la vision, les valeurs et les principes fondamentaux de
-            la Dynamique. Les responsabilités opérationnelles sont ensuite structurées par les
-            organes prévus dans les statuts.
-          </p>
-        </div>
-        <div class="about-team-grid reveal reveal-delay-1">
-          <article v-for="(m, i) in team" :key="i" class="about-team-card">
-            <div class="about-avatar">
-              <span>{{ m.initials }}</span>
-              <div class="about-avatar-ring"></div>
-            </div>
-            <h3>{{ m.name }}</h3>
-            <p class="about-role">{{ m.role }}</p>
-            <p>{{ m.text }}</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <section id="engagement" class="section-pad">
       <div class="container">
         <div class="about-engagement-grid reveal">
@@ -276,8 +229,8 @@ const engagements = [
               compétences et l'alignement éthique.
             </p>
             <div class="about-engagement-actions">
-              <a href="mailto:contact@vuducameroun.org" class="btn-primary">Nous rejoindre</a>
-              <a href="mailto:partenariat@vuducameroun.org" class="btn-ghost">Proposer un projet</a>
+              <RouterLink to="/contact" class="btn-primary">Nous rejoindre</RouterLink>
+              <RouterLink to="/contact" class="btn-ghost">Proposer un projet</RouterLink>
             </div>
           </div>
           <div class="about-engagement-right">
@@ -301,18 +254,23 @@ const engagements = [
 }
 
 .about-hero {
-  align-items: flex-end;
+  align-items: center;
+  color: #f5f2ec;
   display: flex;
-  min-height: 100vh;
+  height: 500px;
+  max-height: 500px;
+  min-height: 500px;
   overflow: hidden;
+  padding: 3.5rem 0;
   position: relative;
 }
 
 .about-hero-bg {
   background:
-    linear-gradient(120deg, rgba(31, 182, 109, 0.1), transparent 34%),
-    linear-gradient(245deg, rgba(217, 58, 53, 0.075), transparent 36%),
-    repeating-linear-gradient(90deg, rgba(245, 242, 236, 0.035) 0 1px, transparent 1px 92px);
+    linear-gradient(180deg, rgba(8, 8, 8, 0.62), rgba(8, 8, 8, 0.82)),
+    linear-gradient(90deg, rgba(8, 8, 8, 0.36), rgba(201, 168, 76, 0.18), rgba(8, 8, 8, 0.36)),
+    url('/images/declaration-troisieme-republique-cameroun.jpg') top center / cover no-repeat;
+  background-attachment: fixed;
   inset: 0;
   position: absolute;
 }
@@ -324,7 +282,9 @@ const engagements = [
   font-size: 0.6rem;
   gap: 0.65rem;
   letter-spacing: 0.18em;
-  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--gold-line);
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
   position: relative;
   text-transform: uppercase;
   z-index: 1;
@@ -332,7 +292,7 @@ const engagements = [
 
 .about-hero-breadcrumb a,
 .about-hero-breadcrumb span {
-  color: var(--grey-mid);
+  color: rgba(245, 242, 236, 0.76);
   text-decoration: none;
 }
 
@@ -341,22 +301,25 @@ const engagements = [
 }
 
 .about-hero-layout {
-  align-items: end;
-  display: grid;
-  gap: 4rem;
-  grid-template-columns: 1.15fr 0.85fr;
-  padding-bottom: 5rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1100px;
+  padding-bottom: 0;
   position: relative;
+  text-align: center;
   z-index: 1;
 }
 
 .about-hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3.4rem, 7vw, 7.8rem);
+  font-size: clamp(2.6rem, 5.4vw, 5.4rem);
   font-weight: 300;
-  letter-spacing: -0.025em;
   line-height: 0.98;
   margin: 1rem 0 0;
+  max-width: 980px;
 }
 
 .about-adn-left em,
@@ -368,19 +331,21 @@ const engagements = [
 }
 
 .about-hero-desc {
-  color: var(--white-dim);
+  color: rgba(245, 242, 236, 0.82);
   font-size: 1.05rem;
   line-height: 1.85;
-  margin: 0 0 2rem;
+  margin: 0 auto 1.25rem;
+  max-width: 720px;
 }
 
 .about-hero-stats {
-  background:
-    linear-gradient(135deg, rgba(31, 182, 109, 0.055), rgba(201, 168, 76, 0.035), rgba(217, 58, 53, 0.045)),
-    rgba(20, 20, 20, 0.72);
-  border: 1px solid var(--gold-line);
+  background: rgba(8, 8, 8, 0.44);
+  border: 1px solid rgba(201, 168, 76, 0.34);
+  backdrop-filter: blur(12px);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0 auto;
+  max-width: 560px;
 }
 
 .about-hero-stats > div {
@@ -411,7 +376,7 @@ const engagements = [
   color: var(--gold);
   display: block;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
+  font-size: 1.55rem;
   font-weight: 400;
   margin-top: 0.35rem;
 }
@@ -427,10 +392,10 @@ const engagements = [
 .about-manifesto-sidebar {
   align-self: start;
   background:
-    linear-gradient(180deg, rgba(31, 182, 109, 0.06), rgba(201, 168, 76, 0.045), rgba(217, 58, 53, 0.045)),
+    linear-gradient(180deg, rgba(201, 168, 76, 0.06), rgba(201, 168, 76, 0.045), rgba(138, 110, 50, 0.045)),
     #141414a6;
   border: 1px solid var(--gold-line);
-  box-shadow: 0 24px 60px #0000003d;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
   padding: 2rem 1.75rem;
   position: sticky;
   top: 7rem;
@@ -521,7 +486,7 @@ const engagements = [
 }
 
 .about-block blockquote {
-  background: linear-gradient(90deg, rgba(31, 182, 109, 0.055), rgba(201, 168, 76, 0.035), transparent);
+  background: linear-gradient(90deg, rgba(201, 168, 76, 0.055), rgba(201, 168, 76, 0.035), transparent);
   border-left: 2px solid var(--gold);
   margin: 2rem 0;
   padding: 1.3rem 0 1.3rem 1.8rem;
@@ -585,7 +550,7 @@ const engagements = [
 
 .about-value-icon {
   align-items: center;
-  background: linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.06), rgba(217, 58, 53, 0.065));
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.08), rgba(201, 168, 76, 0.06), rgba(138, 110, 50, 0.065));
   border: 1px solid var(--gold-line);
   display: flex;
   height: 44px;
@@ -605,7 +570,6 @@ const engagements = [
 
 .about-engagement-body h4,
 .about-pillar-body h4,
-.about-team-card h3,
 .about-value-card h3 {
   color: var(--gold);
   font-family: 'Syne', sans-serif;
@@ -625,8 +589,8 @@ const engagements = [
 
 .about-adn-left {
   background:
-    linear-gradient(125deg, rgba(31, 182, 109, 0.07), transparent 38%),
-    linear-gradient(245deg, rgba(217, 58, 53, 0.05), transparent 34%),
+    linear-gradient(125deg, rgba(201, 168, 76, 0.07), transparent 38%),
+    linear-gradient(245deg, rgba(138, 110, 50, 0.05), transparent 34%),
     linear-gradient(180deg, rgba(201, 168, 76, 0.04), transparent 42%);
   border: 1px solid var(--grey-dark);
   border-right: none;
@@ -707,8 +671,7 @@ const engagements = [
 }
 
 .about-engagement-body p,
-.about-pillar-body p,
-.about-team-card p {
+.about-pillar-body p {
   color: var(--grey-light);
   font-size: 0.9rem;
   line-height: 1.75;
@@ -723,7 +686,7 @@ const engagements = [
 
 .about-figure {
   background:
-    linear-gradient(180deg, rgba(31, 182, 109, 0.035), transparent 50%, rgba(217, 58, 53, 0.028)),
+    linear-gradient(180deg, rgba(201, 168, 76, 0.035), transparent 50%, rgba(138, 110, 50, 0.028)),
     var(--black-3);
   border-right: 1px solid var(--grey-dark);
   padding: 3rem 2rem;
@@ -763,65 +726,11 @@ const engagements = [
   margin-top: 0.35rem;
 }
 
-.about-team-grid {
-  border: 1px solid var(--gold-line);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-}
-
-.about-team-card {
-  background:
-    linear-gradient(180deg, rgba(245, 242, 236, 0.018), transparent 48%),
-    var(--black-3);
-  border-right: 1px solid var(--grey-dark);
-  padding: 2.5rem;
-}
-
-.about-team-card:last-child {
-  border-right: none;
-}
-
-.about-avatar {
-  align-items: center;
-  background: linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.08), rgba(217, 58, 53, 0.07));
-  border: 1px solid var(--gold-line);
-  border-radius: 50%;
-  display: flex;
-  height: 70px;
-  justify-content: center;
-  margin-bottom: 1.4rem;
-  position: relative;
-  width: 70px;
-}
-
-.about-avatar span {
-  color: var(--gold);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-}
-
-.about-avatar-ring {
-  border: 1px solid transparent;
-  border-radius: 50%;
-  inset: -4px;
-  position: absolute;
-}
-
-.about-role {
-  color: var(--gold);
-  font-family: 'Syne', sans-serif;
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-}
-
 .about-engagement-left {
   align-items: center;
   background:
-    linear-gradient(125deg, rgba(31, 182, 109, 0.11), transparent 38%),
-    linear-gradient(245deg, rgba(217, 58, 53, 0.08), transparent 36%),
+    linear-gradient(125deg, rgba(201, 168, 76, 0.11), transparent 38%),
+    linear-gradient(245deg, rgba(138, 110, 50, 0.08), transparent 36%),
     linear-gradient(180deg, #c9a84c14, #141414c7);
   border: 1px solid var(--grey-dark);
   border-right: none;
@@ -897,7 +806,7 @@ const engagements = [
 
 .about-engagement-icon {
   align-items: center;
-  background: linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.06), rgba(217, 58, 53, 0.06));
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.08), rgba(201, 168, 76, 0.06), rgba(138, 110, 50, 0.06));
   border: 1px solid var(--gold-line);
   display: flex;
   flex: 0 0 auto;
@@ -920,19 +829,16 @@ const engagements = [
   }
 
   .about-figures-grid,
-  .about-team-grid,
   .about-values-grid {
     grid-template-columns: 1fr 1fr;
   }
 
   .about-figure:nth-child(2n),
-  .about-team-card:nth-child(2n),
   .about-value-card:nth-child(2n) {
     border-right: none;
   }
 
   .about-figure:nth-last-child(-n + 2),
-  .about-team-card:nth-last-child(-n + 2),
   .about-value-card:nth-last-child(-n + 2) {
     border-bottom: none;
   }
@@ -980,7 +886,6 @@ const engagements = [
   .about-figures-grid,
   .about-hero-layout,
   .about-manifesto-layout,
-  .about-team-grid,
   .about-values-grid {
     grid-template-columns: 1fr;
   }
@@ -995,7 +900,6 @@ const engagements = [
 
   .about-figure,
   .about-hero-stats > div,
-  .about-team-card,
   .about-value-card {
     border-right: none;
   }

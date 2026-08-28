@@ -1,76 +1,33 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useReveal } from '../composables/useReveal'
+import { mergeManagedNotes, publicNotes, type PublicNote } from '../data/notes'
 
 const { observe } = useReveal()
 onMounted(() => {
   document.querySelectorAll('.reveal:not(.visible)').forEach((el) => observe(el))
+  window.addEventListener('storage', refreshNotes)
+  window.addEventListener('vdc-managed-notes-updated', refreshNotes)
 })
 
-const notes = [
-  {
-    slug: 'declaration-dynamique-vu-du-cameroun-au-nom-de-la-jeunesse',
-    tag: 'Déclaration',
-    title: 'Déclaration de la Dynamique Vu du Cameroun : au nom de la jeunesse',
-    image: '/images/declaration-troisieme-republique-cameroun.jpg',
-    date: '4 Avril 2026',
-    text: "La Dynamique Vu du Cameroun prend position au nom de la jeunesse face au tournant institutionnel de la Troisième République.",
-    sourceUrl: 'https://ecobiz54.info/declaration-de-la-dynamique-vu-du-cameroun-au-nom-de-la-jeunesse/',
-  },
-  {
-    slug: 'crise-migration-societe-civile-camerounaise-sommet-afrique-france-2026',
-    tag: 'Tribune',
-    title: "Crise migration : la société civile camerounaise aux marges d'un enjeu brûlant",
-    image: '/images/crise-migration-image-pj.png',
-    date: '21 février 2026',
-    text: "Une tribune sur la migration, la fuite des compétences, les faux recrutements et la responsabilité stratégique de la société civile camerounaise.",
-    sourceUrl: 'https://voixdesjeunes.com/actualite/crise-migration-la-societe-civile-camerounaise-aux-marges-d-un-enjeu-brulant-a-l-aube-du-sommet-afrique-france-2026',
-  },
-  {
-    slug: 'vu-de-yaounde-partenariat-cameroun-france-en-2025',
-    tag: 'Analyse',
-    title: 'Vu de Yaoundé, le partenariat Cameroun - France en 2025',
-    image: '/images/partenariat-cameroun-france-2025.jpg',
-    date: '9 janvier 2026',
-    text: "Vue depuis le Cameroun, l'année 2025 n'a pas été celle d'un spectaculaire tournant dans la relation avec la France, mais celle d'un ajustement maîtrisé.",
-    sourceUrl: 'https://lavoixducentre.info/2026/01/09/vu-de-yaounde-le-partenariat-cameroun-france-en-2025/',
-  },
-  {
-    slug: 'sommet-afrique-france-2026-nairobi-feuille-de-route-societe-civile',
-    tag: 'Concertation',
-    title:
-      "Nairobi 2026 : le Cameroun face au défi d'une diplomatie d'influence et d'une coopération fondée sur les intérêts",
-    image: '/images/Nairobi-2026-le-Cameroun.jpg',
-    date: '23 février 2026',
-    text: "Retour sur la concertation de Yaoundé autour de la gouvernance, de la démocratie et d'un partenariat renouvelé.",
-    sourceUrl: 'https://globalinfosnews.com/sommet-afrique-france-2026-a-nairobi-la-societe-civile-camerounaise-prepare-sa-feuille-de-route-pour-un-partenariat-renouvele-avec-la-france/',
-  },
-  {
-    slug: 'publication-video-vu-du-cameroun-facebook-reel',
-    tag: 'Vidéo',
-    title: 'Publication vidéo Vu du Cameroun',
-    image: '/images/carte.png',
-    date: 'Publication externe',
-    text: "Une publication vidéo à consulter directement sur la page Facebook liée à la dynamique Vu du Cameroun.",
-    sourceUrl: 'https://web.facebook.com/reel/1296440635662593',
-  },
-]
+const notes = ref<PublicNote[]>(mergeManagedNotes(publicNotes))
 
-const formats = [
-  'Notes doctrinales',
-  'Briefs terrain',
-  'Fiches pédagogiques',
-  'Synthèses partenaires',
-  'Retours d’expérience',
-]
+const refreshNotes = () => {
+  notes.value = mergeManagedNotes(publicNotes)
+}
+
+onUnmounted(() => {
+  window.removeEventListener('storage', refreshNotes)
+  window.removeEventListener('vdc-managed-notes-updated', refreshNotes)
+})
 
 const perPage = 8
 const currentPage = ref(1)
-const totalPages = computed(() => Math.ceil(notes.length / perPage))
+const totalPages = computed(() => Math.ceil(notes.value.length / perPage))
 const paginatedNotes = computed(() => {
   const start = (currentPage.value - 1) * perPage
-  return notes.slice(start, start + perPage)
+  return notes.value.slice(start, start + perPage)
 })
 
 const goToPage = (page: number) => {
@@ -83,33 +40,26 @@ const goToPage = (page: number) => {
     <section class="notes-hero section-pad">
       <div class="notes-hero-bg" aria-hidden="true"></div>
       <div class="container">
-        <div class="notes-breadcrumb reveal">
-          <RouterLink to="/">Accueil</RouterLink>
-          <span>›</span>
-          <span class="current">Notes</span>
-        </div>
         <div class="notes-hero-grid">
-          <div>
-            <div class="label reveal">Publications citoyennes</div>
-            <h1 class="notes-title reveal reveal-delay-1">
-              Des notes pour <em>éclairer</em> l'action.
-            </h1>
-          </div>
+          <h1 class="notes-title reveal reveal-delay-1">
+            Des notes pour <em>éclairer</em> l'action.
+          </h1>
           <div class="notes-hero-panel reveal reveal-delay-2">
             <p>
               Les notes donnent une forme lisible aux analyses, enseignements, alertes et
               propositions issues des théâtres d'action. Elles servent à former, documenter et
               transmettre.
             </p>
-            <div class="notes-format-list">
-              <span v-for="format in formats" :key="format">{{ format }}</span>
-            </div>
+          </div>
+          <div class="page-hero-actions reveal reveal-delay-3">
+            <a href="#notes-list" class="btn-primary">Explorer</a>
+            <RouterLink to="/reseaux" class="btn-ghost">Voir les réseaux</RouterLink>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section-pad notes-list-section">
+    <section id="notes-list" class="section-pad notes-list-section">
       <div class="container">
         <div class="notes-heading reveal">
           <div class="gold-rule"></div>
@@ -184,30 +134,38 @@ const goToPage = (page: number) => {
 .notes-hero {
   background: var(--black);
   border-bottom: 1px solid var(--grey-dark);
+  color: #f5f2ec;
+  align-items: center;
+  display: flex;
+  height: 500px;
+  max-height: 500px;
+  min-height: 500px;
   overflow: hidden;
-  padding-top: 10rem;
+  padding: 3.5rem 0;
   position: relative;
 }
 
 .notes-hero-bg {
   background:
-    linear-gradient(120deg, rgba(31, 182, 109, 0.1), transparent 34%),
-    linear-gradient(245deg, rgba(217, 58, 53, 0.08), transparent 36%),
-    repeating-linear-gradient(90deg, var(--white-faint) 0 1px, transparent 1px 88px);
+    linear-gradient(180deg, rgba(8, 8, 8, 0.6), rgba(8, 8, 8, 0.84)),
+    linear-gradient(90deg, rgba(8, 8, 8, 0.42), rgba(201, 168, 76, 0.15), rgba(8, 8, 8, 0.42)),
+    url('/images/Nairobi-2026-le-Cameroun.jpg') top center / cover no-repeat;
+  background-attachment: fixed;
   inset: 0;
-  opacity: 0.45;
   position: absolute;
 }
 
 .notes-breadcrumb {
   align-items: center;
-  color: var(--grey-light);
+  color: rgba(245, 242, 236, 0.76);
   display: flex;
   font-family: 'Syne', sans-serif;
   font-size: 0.68rem;
   gap: 0.7rem;
   letter-spacing: 0.16em;
-  margin-bottom: 4rem;
+  border-bottom: 1px solid var(--gold-line);
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
   position: relative;
   text-transform: uppercase;
   z-index: 1;
@@ -227,12 +185,22 @@ const goToPage = (page: number) => {
   z-index: 1;
 }
 
+.notes-hero-grid {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1120px;
+  text-align: center;
+}
+
 .notes-title {
-  font-size: clamp(2.7rem, 5.2vw, 5.4rem);
+  font-size: clamp(2.4rem, 4.6vw, 4.7rem);
   font-weight: 300;
   line-height: 0.98;
   margin: 1rem 0 0;
-  max-width: 10ch;
+  max-width: 980px;
 }
 
 .notes-title em {
@@ -241,12 +209,11 @@ const goToPage = (page: number) => {
 }
 
 .notes-hero-panel {
-  align-self: end;
-  background:
-    linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.07), rgba(217, 58, 53, 0.06)),
-    var(--black-3);
-  border: 1px solid var(--gold-line);
-  padding: 2rem;
+  align-self: center;
+  background: transparent;
+  border: none;
+  max-width: 760px;
+  padding: 0;
 }
 
 .notes-hero-panel p,
@@ -258,12 +225,17 @@ const goToPage = (page: number) => {
   margin: 0;
 }
 
+.notes-hero-panel p {
+  color: rgba(245, 242, 236, 0.82);
+}
+
 .notes-format-list {
-  border-top: 1px solid var(--grey-dark);
+  border-top: 1px solid rgba(201, 168, 76, 0.34);
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;
-  margin-top: 2rem;
+  justify-content: center;
+  margin: 1.4rem auto 0;
   padding-top: 1.2rem;
 }
 
@@ -309,7 +281,7 @@ const goToPage = (page: number) => {
 .note-card {
   background: var(--black-3);
   border: 1px solid var(--grey-dark);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
   overflow: hidden;

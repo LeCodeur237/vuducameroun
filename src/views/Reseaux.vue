@@ -44,36 +44,26 @@ const protocol = [
     <section class="networks-hero section-pad">
       <div class="networks-hero-bg" aria-hidden="true"></div>
       <div class="container">
-        <div class="networks-breadcrumb reveal">
-          <RouterLink to="/">Accueil</RouterLink>
-          <span>›</span>
-          <span class="current">Réseaux</span>
-        </div>
         <div class="networks-hero-grid">
-          <div>
-            <div class="label reveal">Alliances utiles</div>
-            <h1 class="networks-title reveal reveal-delay-1">
-              Des réseaux pour <em>relier</em> le terrain.
-            </h1>
-          </div>
+          <h1 class="networks-title reveal reveal-delay-1">
+            Des réseaux pour <em>relier</em> le terrain.
+          </h1>
           <div class="networks-hero-panel reveal reveal-delay-2">
             <p>
               Les réseaux de Vu du Cameroun ne sont pas des cercles d’influence fermés. Ce sont
               des passerelles de travail entre jeunes, institutions, communautés, acteurs économiques
               et diaspora.
             </p>
-            <div class="networks-map">
-              <span>Institutions</span>
-              <span>Jeunesse</span>
-              <span>Terrain</span>
-              <span>Diaspora</span>
-            </div>
+          </div>
+          <div class="page-hero-actions reveal reveal-delay-3">
+            <a href="#networks-list" class="btn-primary">Explorer</a>
+            <RouterLink to="/contact" class="btn-ghost">Proposer un partenariat</RouterLink>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section-pad networks-list-section">
+    <section id="networks-list" class="section-pad networks-list-section">
       <div class="container">
         <div class="networks-heading reveal">
           <div class="gold-rule"></div>
@@ -120,7 +110,7 @@ const protocol = [
           <span class="label">Ouverture</span>
           <h2>Rejoindre un réseau, c’est apporter une capacité utile.</h2>
           <div class="networks-actions">
-            <a href="mailto:partenariat@vuducameroun.org" class="btn-primary">Proposer un partenariat</a>
+            <RouterLink to="/contact" class="btn-primary">Proposer un partenariat</RouterLink>
             <RouterLink to="/theatres" class="btn-ghost">Voir les théâtres</RouterLink>
           </div>
         </div>
@@ -138,30 +128,38 @@ const protocol = [
 .networks-hero {
   background: var(--black);
   border-bottom: 1px solid var(--grey-dark);
+  color: #f5f2ec;
+  align-items: center;
+  display: flex;
+  height: 500px;
+  max-height: 500px;
+  min-height: 500px;
   overflow: hidden;
-  padding-top: 10rem;
+  padding: 3.5rem 0;
   position: relative;
 }
 
 .networks-hero-bg {
   background:
-    linear-gradient(120deg, rgba(31, 182, 109, 0.11), transparent 34%),
-    linear-gradient(245deg, rgba(217, 58, 53, 0.08), transparent 36%),
-    repeating-linear-gradient(90deg, var(--white-faint) 0 1px, transparent 1px 90px);
+    linear-gradient(180deg, rgba(8, 8, 8, 0.6), rgba(8, 8, 8, 0.84)),
+    linear-gradient(90deg, rgba(8, 8, 8, 0.42), rgba(201, 168, 76, 0.15), rgba(8, 8, 8, 0.42)),
+    url('/images/partenariat-cameroun-france-2025.jpg') top center / cover no-repeat;
+  background-attachment: fixed;
   inset: 0;
-  opacity: 0.45;
   position: absolute;
 }
 
 .networks-breadcrumb {
   align-items: center;
-  color: var(--grey-light);
+  color: rgba(245, 242, 236, 0.76);
   display: flex;
   font-family: 'Syne', sans-serif;
   font-size: 0.68rem;
   gap: 0.7rem;
   letter-spacing: 0.16em;
-  margin-bottom: 4rem;
+  border-bottom: 1px solid var(--gold-line);
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
   position: relative;
   text-transform: uppercase;
   z-index: 1;
@@ -181,12 +179,22 @@ const protocol = [
   z-index: 1;
 }
 
+.networks-hero-grid {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1120px;
+  text-align: center;
+}
+
 .networks-title {
-  font-size: clamp(3rem, 6.5vw, 6.6rem);
+  font-size: clamp(2.5rem, 5vw, 5rem);
   font-weight: 300;
   line-height: 0.98;
   margin: 1rem 0 0;
-  max-width: 10ch;
+  max-width: 980px;
 }
 
 .networks-title em {
@@ -195,12 +203,11 @@ const protocol = [
 }
 
 .networks-hero-panel {
-  align-self: end;
-  background:
-    linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.07), rgba(217, 58, 53, 0.06)),
-    var(--black-3);
-  border: 1px solid var(--gold-line);
-  padding: 2rem;
+  align-self: center;
+  background: transparent;
+  border: none;
+  max-width: 760px;
+  padding: 0;
 }
 
 .networks-hero-panel p,
@@ -212,12 +219,17 @@ const protocol = [
   margin: 0;
 }
 
+.networks-hero-panel p {
+  color: rgba(245, 242, 236, 0.82);
+}
+
 .networks-map,
 .network-roles {
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;
-  margin-top: 1.7rem;
+  justify-content: center;
+  margin: 1.7rem auto 0;
 }
 
 .networks-map span,

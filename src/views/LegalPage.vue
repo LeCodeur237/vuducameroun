@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router'
+
 type Section = {
   title: string
   paragraphs: string[]
@@ -15,17 +17,20 @@ defineProps<{
 
 <template>
   <section class="legal-hero">
+    <div class="legal-hero-bg" aria-hidden="true"></div>
     <div class="container">
       <div class="legal-hero-inner reveal visible">
-        <div class="label">{{ eyebrow }}</div>
         <h1>{{ title }}</h1>
         <p>{{ intro }}</p>
-        <span>Derniere mise a jour: {{ updatedAt }}</span>
+        <div class="page-hero-actions reveal reveal-delay-3">
+          <a href="#legal-content" class="btn-primary">Lire</a>
+          <RouterLink to="/contact" class="btn-ghost">Nous contacter</RouterLink>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section-pad legal-section">
+  <section id="legal-content" class="section-pad legal-section">
     <div class="container">
       <div class="legal-layout">
         <aside class="legal-aside">
@@ -53,27 +58,47 @@ defineProps<{
 
 <style scoped>
 .legal-hero {
+  align-items: center;
   background:
-    linear-gradient(115deg, rgba(31, 182, 109, 0.1), transparent 34%),
-    linear-gradient(245deg, rgba(217, 58, 53, 0.07), transparent 34%),
     var(--black);
   border-bottom: 1px solid var(--grey-dark);
-  padding: 10rem 0 5rem;
+  color: #f5f2ec;
+  display: flex;
+  height: 500px;
+  max-height: 500px;
+  min-height: 500px;
+  overflow: hidden;
+  padding: 3.5rem 0;
+  position: relative;
+}
+
+.legal-hero-bg {
+  background:
+    linear-gradient(180deg, rgba(8, 8, 8, 0.62), rgba(8, 8, 8, 0.86)),
+    linear-gradient(90deg, rgba(8, 8, 8, 0.42), rgba(201, 168, 76, 0.15), rgba(8, 8, 8, 0.42)),
+    url('/images/carte.png') center / cover no-repeat;
+  background-attachment: fixed;
+  inset: 0;
+  position: absolute;
 }
 
 .legal-hero-inner {
-  max-width: 820px;
+  margin: 0 auto;
+  max-width: 1080px;
+  position: relative;
+  text-align: center;
+  z-index: 1;
 }
 
 .legal-hero h1 {
-  font-size: clamp(2.7rem, 6vw, 5.5rem);
+  font-size: clamp(2.4rem, 5vw, 4.8rem);
   font-weight: 300;
-  line-height: 1.05;
+  line-height: 0.98;
   margin: 1rem 0 1.5rem;
 }
 
 .legal-hero p {
-  color: var(--white-dim);
+  color: rgba(245, 242, 236, 0.82);
   font-size: 1.08rem;
   line-height: 1.85;
   margin: 0 0 1.4rem;
@@ -101,7 +126,7 @@ defineProps<{
 
 .legal-aside {
   background:
-    linear-gradient(180deg, rgba(31, 182, 109, 0.06), rgba(201, 168, 76, 0.04), rgba(217, 58, 53, 0.04)),
+    linear-gradient(180deg, rgba(201, 168, 76, 0.06), rgba(201, 168, 76, 0.04), rgba(138, 110, 50, 0.04)),
     var(--black-3);
   border: 1px solid var(--gold-line);
   padding: 2rem;
@@ -173,7 +198,7 @@ defineProps<{
 
 @media (max-width: 720px) {
   .legal-hero {
-    padding: 8rem 0 4rem;
+    padding: 3.5rem 0;
   }
 
   .legal-card {

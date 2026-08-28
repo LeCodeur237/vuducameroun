@@ -13,11 +13,49 @@ const ringX = ref(0)
 const ringY = ref(0)
 
 let raf = 0
+let parallaxRaf = 0
 let targetX = 0
 let targetY = 0
 
+const parallaxSelector = [
+  '.about-hero-bg',
+  '.notes-hero-bg',
+  '.note-detail-bg',
+  '.method-hero-bg',
+  '.theatres-hero-bg',
+  '.networks-hero-bg',
+  '.contact-hero-bg',
+  '.legal-hero-bg',
+].join(',')
+
+const updateHeroParallax = () => {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (reducedMotion || window.innerWidth <= 820) {
+    document
+      .querySelectorAll<HTMLElement>(parallaxSelector)
+      .forEach((el) => el.style.removeProperty('--hero-parallax-y'))
+    return
+  }
+
+  document.querySelectorAll<HTMLElement>(parallaxSelector).forEach((el) => {
+    const container = el.parentElement
+    const rect = container?.getBoundingClientRect() ?? el.getBoundingClientRect()
+    const offset = Math.max(-80, Math.min(80, rect.top * -0.14))
+    el.style.setProperty('--hero-parallax-y', `${offset}px`)
+  })
+}
+
+const requestHeroParallax = () => {
+  if (parallaxRaf) return
+  parallaxRaf = requestAnimationFrame(() => {
+    parallaxRaf = 0
+    updateHeroParallax()
+  })
+}
+
 const onScroll = () => {
   scrolled.value = window.scrollY > 40
+  requestHeroParallax()
 }
 
 const onMouseMove = (e: MouseEvent) => {
@@ -42,6 +80,7 @@ const toggleTheme = () => {
   applyTheme(theme.value)
 }
 
+const isHome = computed(() => route.path === '/')
 const themeLabel = computed(() => theme.value === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre')
 const logoSrc = computed(() => theme.value === 'light' ? '/logo/logo-black.png' : '/logo/logo.png')
 
@@ -65,21 +104,26 @@ onMounted(() => {
   theme.value = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : prefersLight ? 'light' : 'dark'
   applyTheme(theme.value)
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('resize', requestHeroParallax)
   window.addEventListener('mousemove', onMouseMove)
   onScroll()
+  requestHeroParallax()
   refreshReveals()
   animateRing()
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('resize', requestHeroParallax)
   window.removeEventListener('mousemove', onMouseMove)
   cancelAnimationFrame(raf)
+  cancelAnimationFrame(parallaxRaf)
 })
 
 watch(() => route.path, () => {
   closeNav()
   refreshReveals()
+  nextTick(requestHeroParallax)
 })
 </script>
 
@@ -96,7 +140,7 @@ watch(() => route.path, () => {
       :style="{ transform: `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)` }"
     ></div>
 
-    <header class="site-nav" :class="{ scrolled }">
+    <header class="site-nav" :class="{ scrolled, 'is-home': isHome }">
       <RouterLink to="/" class="nav-logo" aria-label="Vu du Cameroun">
         <div class="logo-icon">
           <img :src="logoSrc" alt="Vu du Cameroun" class="logo-image" />
@@ -143,7 +187,7 @@ watch(() => route.path, () => {
             <path d="M21 12.8A8.6 8.6 0 0 1 11.2 3a7 7 0 1 0 9.8 9.8z"></path>
           </svg>
         </button>
-        <a href="/#cta-final" class="nav-cta" @click="closeNav">Rejoindre</a>
+        <RouterLink to="/contact" class="nav-cta" @click="closeNav">Rejoindre</RouterLink>
         <button
           class="nav-toggle"
           type="button"
@@ -181,7 +225,7 @@ watch(() => route.path, () => {
             <path d="M21 12.8A8.6 8.6 0 0 1 11.2 3a7 7 0 1 0 9.8 9.8z"></path>
           </svg>
         </button>
-        <a href="/#cta-final" class="mobile-nav-cta" @click="closeNav">Rejoindre</a>
+        <RouterLink to="/contact" class="mobile-nav-cta" @click="closeNav">Rejoindre</RouterLink>
       </nav>
     </header>
 
@@ -221,14 +265,14 @@ watch(() => route.path, () => {
                   <circle cx="12" cy="12" r="9"></circle>
                 </svg>
               </a>
-              <a href="/#cta-final" class="social-link" aria-label="Adhérer">
+              <RouterLink to="/contact" class="social-link" aria-label="Adhérer">
                 <svg viewBox="0 0 24 24">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
                   <circle cx="9.5" cy="7" r="4"></circle>
                   <path d="M19 8v6"></path>
                   <path d="M22 11h-6"></path>
                 </svg>
-              </a>
+              </RouterLink>
               <a href="mailto:presse@vuducameroun.org" class="social-link" aria-label="Presse">
                 <svg viewBox="0 0 24 24">
                   <path d="M4 19.5V5a2 2 0 0 1 2-2h11v18H6a2 2 0 0 1-2-1.5z"></path>
@@ -256,7 +300,7 @@ watch(() => route.path, () => {
               <li><RouterLink to="/notes">Notes citoyennes</RouterLink></li>
               <li><RouterLink to="/theatres">Théâtres jeunesse</RouterLink></li>
               <li><RouterLink to="/reseaux">Réseaux partenaires</RouterLink></li>
-              <li><a href="/#cta-final">Adhérer</a></li>
+              <li><RouterLink to="/contact">Adhérer</RouterLink></li>
               <li><a href="mailto:presse@vuducameroun.org">Presse</a></li>
             </ul>
           </div>

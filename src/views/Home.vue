@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useReveal } from '../composables/useReveal'
+import { mergeManagedNotes, publicNotes, type PublicNote } from '../data/notes'
 
 const { observe } = useReveal()
 onMounted(() => {
   document.querySelectorAll('.reveal:not(.visible)').forEach((el) => observe(el))
+  window.addEventListener('storage', refreshPublications)
+  window.addEventListener('vdc-managed-notes-updated', refreshPublications)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('storage', refreshPublications)
+  window.removeEventListener('vdc-managed-notes-updated', refreshPublications)
 })
 
 const tickerItems = [
@@ -83,36 +91,17 @@ const intlStats = [
   { num: 'National', label: 'International' },
 ]
 
-const publications = [
-  {
-    tag: 'Déclaration',
-    title: 'Déclaration de la Dynamique Vu du Cameroun : au nom de la jeunesse',
-    text: "La Dynamique Vu du Cameroun prend position au nom de la jeunesse face au tournant institutionnel de la Troisième République.",
-    date: '4 Avril 2026',
-    image: '/images/declaration-troisieme-republique-cameroun.jpg',
-    imageAlt: 'Mobilisation citoyenne au Cameroun',
-    slug: 'declaration-dynamique-vu-du-cameroun-au-nom-de-la-jeunesse',
-    featured: true,
-  },
-  {
-    tag: 'Tribune',
-    title: "Crise migration : la société civile camerounaise aux marges d'un enjeu brûlant",
-    text: "Une tribune sur la migration, la fuite des compétences, les faux recrutements et la responsabilité stratégique de la société civile camerounaise.",
-    date: '21 février 2026',
-    image: '/images/crise-migration-image-pj.png',
-    imageAlt: "Famille face aux routes de l'exil",
-    slug: 'crise-migration-societe-civile-camerounaise-sommet-afrique-france-2026',
-  },
-  {
-    tag: 'Analyse',
-    title: 'Vu de Yaoundé, le partenariat Cameroun - France en 2025',
-    text: "Une lecture camerounaise du partenariat avec la France: mémoire, économie, sécurité, jeunesse et bataille des récits.",
-    date: '9 janvier 2026',
-    image: '/images/partenariat-cameroun-france-2025.jpg',
-    imageAlt: 'Conférence de presse Cameroun France',
-    slug: 'vu-de-yaounde-partenariat-cameroun-france-en-2025',
-  },
-]
+const managedPublications = ref<PublicNote[]>(mergeManagedNotes(publicNotes))
+const publications = computed(() =>
+  managedPublications.value.slice(0, 3).map((note, index) => ({
+    ...note,
+    featured: index === 0,
+  }))
+)
+
+const refreshPublications = () => {
+  managedPublications.value = mergeManagedNotes(publicNotes)
+}
 
 const partnerCats = [
   { title: 'Pouvoirs publics & CTD', text: "Une action complémentaire aux efforts de l'État, des collectivités territoriales décentralisées et des dispositifs publics de développement.", icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>' },
@@ -146,7 +135,7 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
             développement du Cameroun.
           </p>
           <div class="hero-actions">
-            <a href="#cta-final" class="btn-primary">Entrer dans la dynamique</a>
+            <RouterLink to="/contact" class="btn-primary">Entrer dans la dynamique</RouterLink>
             <a href="#domains" class="btn-ghost">Découvrir nos axes</a>
           </div>
           <div class="hero-slogan">
@@ -239,10 +228,10 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
           <div class="domain-icon" v-html="`<svg viewBox='0 0 24 24'>${d.icon}</svg>`"></div>
           <h3>{{ d.title }}</h3>
           <p>{{ d.text }}</p>
-          <a href="#cta-final" class="domain-link">
+          <RouterLink to="/contact" class="domain-link">
             Agir
             <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-          </a>
+          </RouterLink>
         </article>
       </div>
     </div>
@@ -334,7 +323,7 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
           :class="{ featured: p.featured }"
         >
           <div class="pub-image">
-            <img :src="p.image" :alt="p.imageAlt" loading="lazy" decoding="async" />
+            <img :src="p.image" :alt="p.title" loading="lazy" decoding="async" />
           </div>
           <div class="pub-tag">{{ p.tag }}</div>
           <h3>{{ p.title }}</h3>
@@ -396,8 +385,8 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
           institution ou partenaire. Rejoignez une dynamique d'éthique, de service et d'impact.
         </p>
         <div class="cta-actions reveal reveal-delay-3">
-          <a href="mailto:contact@vuducameroun.org" class="btn-primary">Nous rejoindre</a>
-          <a href="mailto:partenariat@vuducameroun.org" class="btn-ghost">Porter un projet</a>
+          <RouterLink to="/contact" class="btn-primary">Nous rejoindre</RouterLink>
+          <RouterLink to="/contact" class="btn-ghost">Porter un projet</RouterLink>
         </div>
       </div>
     </div>
@@ -420,8 +409,8 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
 
 .hero-bg {
   background:
-    linear-gradient(115deg, rgba(31, 182, 109, 0.11), transparent 32%),
-    linear-gradient(245deg, rgba(217, 58, 53, 0.08), transparent 34%),
+    linear-gradient(115deg, rgba(201, 168, 76, 0.11), transparent 32%),
+    linear-gradient(245deg, rgba(138, 110, 50, 0.08), transparent 34%),
     linear-gradient(180deg, rgba(201, 168, 76, 0.08), transparent 72%);
 }
 
@@ -435,8 +424,8 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
   background-image:
     linear-gradient(var(--white-faint) 1px, transparent 1px),
     linear-gradient(90deg, var(--white-faint) 1px, transparent 1px),
-    linear-gradient(135deg, transparent 0 48%, rgba(31, 182, 109, 0.08) 48% 49%, transparent 49%),
-    linear-gradient(45deg, transparent 0 51%, rgba(217, 58, 53, 0.07) 51% 52%, transparent 52%);
+    linear-gradient(135deg, transparent 0 48%, rgba(201, 168, 76, 0.08) 48% 49%, transparent 49%),
+    linear-gradient(45deg, transparent 0 51%, rgba(138, 110, 50, 0.07) 51% 52%, transparent 52%);
   background-size: 80px 80px;
   opacity: 0.08;
 }
@@ -591,7 +580,7 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
 
 .hero-stat-row {
   background:
-    linear-gradient(90deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.06), rgba(217, 58, 53, 0.07)),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.08), rgba(201, 168, 76, 0.06), rgba(138, 110, 50, 0.07)),
     var(--black-3);
   border: 1px solid var(--gold-line);
   bottom: -2.75rem;
@@ -764,7 +753,7 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
     linear-gradient(180deg, rgba(245, 242, 236, 0.018), transparent 42%),
     var(--black-3);
   border: 1px solid var(--grey-dark);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   position: relative;
 }
@@ -935,7 +924,7 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
 
 .domain-card:hover {
   background:
-    linear-gradient(180deg, rgba(31, 182, 109, 0.04), rgba(201, 168, 76, 0.025), rgba(217, 58, 53, 0.035)),
+    linear-gradient(180deg, rgba(201, 168, 76, 0.04), rgba(201, 168, 76, 0.025), rgba(138, 110, 50, 0.035)),
     var(--black-2);
 }
 
@@ -979,8 +968,8 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
 
 .section-approach {
   background:
-    linear-gradient(110deg, rgba(31, 182, 109, 0.055), transparent 35%),
-    linear-gradient(250deg, rgba(217, 58, 53, 0.045), transparent 34%),
+    linear-gradient(110deg, rgba(201, 168, 76, 0.055), transparent 35%),
+    linear-gradient(250deg, rgba(138, 110, 50, 0.045), transparent 34%),
     var(--black-3);
   overflow: hidden;
   position: relative;
@@ -1070,7 +1059,7 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
 
 .map-container {
   background:
-    linear-gradient(90deg, rgba(31, 182, 109, 0.04), transparent 40%, rgba(217, 58, 53, 0.04)),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.04), transparent 40%, rgba(138, 110, 50, 0.04)),
     var(--black-3);
   border: 1px solid var(--gold-line);
   overflow: hidden;
@@ -1169,7 +1158,7 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
 
 .pub-image {
   background:
-    linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.08), rgba(217, 58, 53, 0.07)),
+    linear-gradient(135deg, rgba(201, 168, 76, 0.08), rgba(201, 168, 76, 0.08), rgba(138, 110, 50, 0.07)),
     var(--black-2);
   border: 1px solid var(--gold-line);
   aspect-ratio: 16 / 10;
@@ -1195,7 +1184,7 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
 
 .pub-card.featured {
   background:
-    linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.1), rgba(217, 58, 53, 0.07)),
+    linear-gradient(135deg, rgba(201, 168, 76, 0.08), rgba(201, 168, 76, 0.1), rgba(138, 110, 50, 0.07)),
     #0f0f0fcc;
 }
 
@@ -1278,8 +1267,8 @@ const partnerLogos = ['État', 'CTD', 'CEMAC', 'Union Africaine', 'Diaspora', 'C
 
 .section-cta {
   background:
-    linear-gradient(120deg, rgba(31, 182, 109, 0.06), transparent 36%),
-    linear-gradient(240deg, rgba(217, 58, 53, 0.05), transparent 34%);
+    linear-gradient(120deg, rgba(201, 168, 76, 0.06), transparent 36%),
+    linear-gradient(240deg, rgba(138, 110, 50, 0.05), transparent 34%);
   overflow: hidden;
   position: relative;
   text-align: center;

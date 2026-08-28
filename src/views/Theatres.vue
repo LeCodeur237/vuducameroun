@@ -60,35 +60,26 @@ const principles = [
     <section class="theatres-hero section-pad">
       <div class="theatres-hero-bg" aria-hidden="true"></div>
       <div class="container">
-        <div class="theatres-breadcrumb reveal">
-          <RouterLink to="/">Accueil</RouterLink>
-          <span>›</span>
-          <span class="current">Théâtres</span>
-        </div>
         <div class="theatres-hero-grid">
-          <div>
-            <div class="label reveal">Champs d'action</div>
-            <h1 class="theatres-title reveal reveal-delay-1">
-              Là où la conscience devient <em>action</em>.
-            </h1>
-          </div>
+          <h1 class="theatres-title reveal reveal-delay-1">
+            Là où la conscience devient <em>action</em>.
+          </h1>
           <div class="theatres-hero-panel reveal reveal-delay-2">
             <p>
               Les théâtres d'action structurent l'intervention de Vu du Cameroun: lire les
               vulnérabilités, former les jeunes, agir au plus près du terrain et construire des
               passerelles utiles avec les institutions, les communautés et les réseaux de la diaspora.
             </p>
-            <div class="theatres-hero-stats">
-              <span>04 théâtres</span>
-              <span>Terrain</span>
-              <span>Impact</span>
-            </div>
+          </div>
+          <div class="page-hero-actions reveal reveal-delay-3">
+            <a href="#theatres-list" class="btn-primary">Explorer</a>
+            <RouterLink to="/methode" class="btn-ghost">Voir la méthode</RouterLink>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section-pad theatres-list-section">
+    <section id="theatres-list" class="section-pad theatres-list-section">
       <div class="container">
         <div class="theatres-intro reveal">
           <div class="gold-rule"></div>
@@ -165,7 +156,7 @@ const principles = [
             relier à la dynamique.
           </p>
           <div class="theatres-actions">
-            <a href="mailto:contact@vuducameroun.org" class="btn-primary">Contribuer</a>
+            <RouterLink to="/contact" class="btn-primary">Contribuer</RouterLink>
             <RouterLink to="/instance" class="btn-ghost">Voir l'instance</RouterLink>
           </div>
         </div>
@@ -183,30 +174,38 @@ const principles = [
 .theatres-hero {
   background: var(--black);
   border-bottom: 1px solid var(--grey-dark);
+  color: #f5f2ec;
+  align-items: center;
+  display: flex;
+  height: 500px;
+  max-height: 500px;
+  min-height: 500px;
   overflow: hidden;
-  padding-top: 10rem;
+  padding: 3.5rem 0;
   position: relative;
 }
 
 .theatres-hero-bg {
   background:
-    linear-gradient(120deg, rgba(31, 182, 109, 0.12), transparent 34%),
-    linear-gradient(245deg, rgba(217, 58, 53, 0.08), transparent 36%),
-    repeating-linear-gradient(90deg, var(--white-faint) 0 1px, transparent 1px 92px);
+    linear-gradient(180deg, rgba(8, 8, 8, 0.56), rgba(8, 8, 8, 0.84)),
+    linear-gradient(90deg, rgba(8, 8, 8, 0.44), rgba(201, 168, 76, 0.16), rgba(8, 8, 8, 0.44)),
+    url('/images/declaration-troisieme-republique-cameroun.jpg') top center / cover no-repeat;
+  background-attachment: fixed;
   inset: 0;
-  opacity: 0.42;
   position: absolute;
 }
 
 .theatres-breadcrumb {
   align-items: center;
-  color: var(--grey-light);
+  color: rgba(245, 242, 236, 0.76);
   display: flex;
   font-family: 'Syne', sans-serif;
   font-size: 0.68rem;
   gap: 0.7rem;
   letter-spacing: 0.16em;
-  margin-bottom: 4rem;
+  border-bottom: 1px solid var(--gold-line);
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
   position: relative;
   text-transform: uppercase;
   z-index: 1;
@@ -226,12 +225,22 @@ const principles = [
   z-index: 1;
 }
 
+.theatres-hero-grid {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1120px;
+  text-align: center;
+}
+
 .theatres-title {
-  font-size: clamp(3.2rem, 7vw, 7rem);
+  font-size: clamp(2.5rem, 5.2vw, 5.2rem);
   font-weight: 300;
   line-height: 0.98;
   margin: 1rem 0 0;
-  max-width: 9ch;
+  max-width: 980px;
 }
 
 .theatres-title em,
@@ -241,12 +250,11 @@ const principles = [
 }
 
 .theatres-hero-panel {
-  align-self: end;
-  background:
-    linear-gradient(135deg, rgba(31, 182, 109, 0.08), rgba(201, 168, 76, 0.07), rgba(217, 58, 53, 0.06)),
-    var(--black-3);
-  border: 1px solid var(--gold-line);
-  padding: 2rem;
+  align-self: center;
+  background: transparent;
+  border: none;
+  max-width: 760px;
+  padding: 0;
 }
 
 .theatres-hero-panel p,
@@ -260,13 +268,18 @@ const principles = [
   margin: 0;
 }
 
+.theatres-hero-panel p {
+  color: rgba(245, 242, 236, 0.82);
+}
+
 .theatres-hero-stats {
-  border-top: 1px solid var(--grey-dark);
+  border-top: 1px solid rgba(201, 168, 76, 0.34);
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 2rem;
+  margin: 1.4rem auto 0;
   padding-top: 1.2rem;
+  max-width: 520px;
 }
 
 .theatres-hero-stats span {
@@ -387,7 +400,7 @@ const principles = [
 }
 
 .theatre-impact {
-  background: linear-gradient(90deg, rgba(31, 182, 109, 0.07), rgba(201, 168, 76, 0.05), rgba(217, 58, 53, 0.05));
+  background: linear-gradient(90deg, rgba(201, 168, 76, 0.07), rgba(201, 168, 76, 0.05), rgba(138, 110, 50, 0.05));
   border: 1px solid var(--gold-line);
   margin-top: 2rem;
   padding: 1.4rem;
@@ -469,10 +482,6 @@ const principles = [
   .theatres-hero-grid,
   .theatres-method-grid {
     grid-template-columns: 1fr;
-  }
-
-  .theatres-title {
-    max-width: 12ch;
   }
 }
 

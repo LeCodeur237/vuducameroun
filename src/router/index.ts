@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Instance from '../views/Instance.vue'
 import ConditionsUtilisation from '../views/ConditionsUtilisation.vue'
+import Contact from '../views/Contact.vue'
+import Dashboard from '../views/Dashboard.vue'
 import MentionsLegales from '../views/MentionsLegales.vue'
 import Methode from '../views/Methode.vue'
 import NoteDetail from '../views/NoteDetail.vue'
@@ -14,6 +16,8 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'home', component: Home },
+    { path: '/contact', name: 'contact', component: Contact },
+    { path: '/dashboard', name: 'dashboard', component: Dashboard },
     { path: '/instance', name: 'instance', component: Instance },
     { path: '/methode', name: 'methode', component: Methode },
     { path: '/notes', name: 'notes', component: Notes },
